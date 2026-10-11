@@ -30,7 +30,7 @@ html.lenis, html.lenis body {
 
 
 @page {
-  margin: 10mm 12mm;
+  margin: 8mm 10mm;
   size: A4 portrait;
 }
 
@@ -47,8 +47,9 @@ html.lenis, html.lenis body {
     width: 100% !important;
     height: auto !important;
     min-height: auto !important;
-    font-size: 11px !important;
-    line-height: 1.35 !important;
+    font-size: 12px !important;
+    line-height: 1.5 !important;
+    letter-spacing: 0.01em !important;
     -webkit-print-color-adjust: exact !important;
     print-color-adjust: exact !important;
   }
@@ -78,15 +79,16 @@ html.lenis, html.lenis body {
     text-align: right !important;
   }
 
-  /* Clean borderless inputs in print */
+  /* Clean borderless inputs in print with natural line height and breathing room */
   input, textarea, select {
     border-color: transparent !important;
     background-color: transparent !important;
     box-shadow: none !important;
-    padding: 0 !important;
+    padding: 1px 0 !important;
     margin: 0 !important;
     resize: none !important;
     font-size: inherit !important;
+    line-height: inherit !important;
     color: #0f172a !important;
   }
 
