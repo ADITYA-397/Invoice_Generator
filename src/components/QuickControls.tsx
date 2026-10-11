@@ -32,15 +32,15 @@ export const QuickControls: React.FC<QuickControlsProps> = ({ invoice, onChange 
   };
 
   return (
-    <div className="no-print w-full bg-white border border-slate-200/90 rounded-2xl p-4 sm:p-5 shadow-xs mb-4 sm:mb-6">
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-5">
+    <div className="no-print w-full bg-white border border-slate-200/90 rounded-2xl p-3.5 sm:p-5 shadow-xs mb-4 sm:mb-6 min-w-0">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-5 min-w-0">
         {/* 1. Currency Selector */}
-        <div className="space-y-1.5">
+        <div className="space-y-1.5 min-w-0">
           <label className="flex items-center gap-1.5 text-xs font-bold uppercase tracking-wider text-slate-500">
-            <DollarSign className="w-3.5 h-3.5 text-slate-400" />
+            <DollarSign className="w-3.5 h-3.5 text-slate-400 shrink-0" />
             <span>Currency</span>
           </label>
-          <div className="flex flex-wrap items-center gap-1.5">
+          <div className="flex flex-wrap items-center gap-1.5 min-w-0">
             {(['USD', 'EUR', 'GBP', 'INR', 'CAD'] as CurrencyCode[]).map((curr) => {
               const info = CURRENCIES[curr];
               const isSelected = invoice.currency === curr;
@@ -49,7 +49,7 @@ export const QuickControls: React.FC<QuickControlsProps> = ({ invoice, onChange 
                   key={curr}
                   type="button"
                   onClick={() => handleCurrencyChange(curr)}
-                  className={`h-8 px-2.5 text-xs font-semibold rounded-lg transition-colors cursor-pointer border ${
+                  className={`h-8 px-2 sm:px-2.5 text-xs font-semibold rounded-lg transition-colors cursor-pointer border ${
                     isSelected
                       ? 'bg-slate-900 text-white border-slate-900 shadow-xs'
                       : 'bg-slate-50 text-slate-700 border-slate-200 hover:bg-slate-100 hover:text-slate-900'
@@ -63,7 +63,7 @@ export const QuickControls: React.FC<QuickControlsProps> = ({ invoice, onChange 
             <select
               value={invoice.currency}
               onChange={(e) => handleCurrencyChange(e.target.value as CurrencyCode)}
-              className="h-8 text-xs bg-slate-50 border border-slate-200 rounded-lg px-2 text-slate-700 hover:bg-slate-100 cursor-pointer focus:outline-none focus:ring-1 focus:ring-slate-400"
+              className="h-8 text-xs bg-slate-50 border border-slate-200 rounded-lg px-2 text-slate-700 hover:bg-slate-100 cursor-pointer focus:outline-none focus:ring-1 focus:ring-slate-400 min-w-[90px] flex-1 sm:flex-initial"
               aria-label="More Currencies"
             >
               <option value="USD">USD ($)</option>
@@ -79,12 +79,12 @@ export const QuickControls: React.FC<QuickControlsProps> = ({ invoice, onChange 
         </div>
 
         {/* 2. Due Date Presets */}
-        <div className="space-y-1.5">
+        <div className="space-y-1.5 min-w-0">
           <label className="flex items-center gap-1.5 text-xs font-bold uppercase tracking-wider text-slate-500">
-            <Calendar className="w-3.5 h-3.5 text-slate-400" />
+            <Calendar className="w-3.5 h-3.5 text-slate-400 shrink-0" />
             <span>Payment Terms Preset</span>
           </label>
-          <div className="flex flex-wrap items-center gap-1.5">
+          <div className="flex flex-wrap items-center gap-1.5 min-w-0">
             {[
               { label: 'Receipt', days: 0, term: 'Due on Receipt' },
               { label: 'Net 15', days: 15, term: 'Net 15' },
@@ -97,7 +97,7 @@ export const QuickControls: React.FC<QuickControlsProps> = ({ invoice, onChange 
                   key={p.label}
                   type="button"
                   onClick={() => handleDuePreset(p.days, p.term)}
-                  className={`h-8 px-2.5 text-xs font-semibold rounded-lg transition-colors cursor-pointer border ${
+                  className={`h-8 px-2 sm:px-2.5 text-xs font-semibold rounded-lg transition-colors cursor-pointer border ${
                     isSelected
                       ? 'bg-slate-900 text-white border-slate-900 shadow-xs'
                       : 'bg-slate-50 text-slate-700 border-slate-200 hover:bg-slate-100'
@@ -111,16 +111,16 @@ export const QuickControls: React.FC<QuickControlsProps> = ({ invoice, onChange 
         </div>
 
         {/* 3. Financial Presets (Tax & Discount) */}
-        <div className="space-y-1.5">
+        <div className="space-y-1.5 min-w-0">
           <label className="flex items-center gap-1.5 text-xs font-bold uppercase tracking-wider text-slate-500">
-            <Percent className="w-3.5 h-3.5 text-slate-400" />
+            <Percent className="w-3.5 h-3.5 text-slate-400 shrink-0" />
             <span>Tax & Discount Quick Sets</span>
           </label>
-          <div className="space-y-2">
+          <div className="space-y-2 min-w-0">
             {/* Tax Row */}
-            <div className="flex items-center gap-1.5 flex-wrap">
-              <span className="text-xs font-medium text-slate-500 w-9 shrink-0">Tax:</span>
-              <div className="flex items-center gap-1 flex-wrap">
+            <div className="flex items-center gap-1.5 flex-wrap min-w-0">
+              <span className="text-xs font-medium text-slate-500 w-8 sm:w-9 shrink-0">Tax:</span>
+              <div className="flex items-center gap-1 flex-wrap min-w-0">
                 {[0, 8.25, 10, 18, 20].map((rate) => (
                   <button
                     key={rate}
@@ -139,9 +139,9 @@ export const QuickControls: React.FC<QuickControlsProps> = ({ invoice, onChange 
             </div>
 
             {/* Discount Row */}
-            <div className="flex items-center gap-1.5 flex-wrap">
-              <span className="text-xs font-medium text-slate-500 w-9 shrink-0">Disc:</span>
-              <div className="flex items-center gap-1 flex-wrap">
+            <div className="flex items-center gap-1.5 flex-wrap min-w-0">
+              <span className="text-xs font-medium text-slate-500 w-8 sm:w-9 shrink-0">Disc:</span>
+              <div className="flex items-center gap-1 flex-wrap min-w-0">
                 {[0, 5, 10, 15].map((disc) => (
                   <button
                     key={disc}
@@ -162,20 +162,20 @@ export const QuickControls: React.FC<QuickControlsProps> = ({ invoice, onChange 
         </div>
 
         {/* 4. Accent Palette & Invoice Status */}
-        <div className="space-y-1.5">
+        <div className="space-y-1.5 min-w-0">
           <div className="flex items-center justify-between text-xs font-bold uppercase tracking-wider text-slate-500">
             <span className="flex items-center gap-1.5">
-              <Palette className="w-3.5 h-3.5 text-slate-400" />
+              <Palette className="w-3.5 h-3.5 text-slate-400 shrink-0" />
               <span>Accent & Status</span>
             </span>
             <span className="flex items-center gap-1 font-normal text-slate-400 capitalize">
-              <CheckCircle2 className="w-3 h-3 text-emerald-600" />
+              <CheckCircle2 className="w-3 h-3 text-emerald-600 shrink-0" />
               <span>{invoice.status}</span>
             </span>
           </div>
-          <div className="space-y-2">
+          <div className="space-y-2 min-w-0">
             {/* Color Swatches */}
-            <div className="flex items-center gap-2">
+            <div className="flex items-center gap-2 flex-wrap min-w-0">
               {ACCENT_THEMES.map((theme) => {
                 const isSelected = invoice.themeId === theme.id;
                 return (
@@ -194,12 +194,12 @@ export const QuickControls: React.FC<QuickControlsProps> = ({ invoice, onChange 
             </div>
 
             {/* Status Selector */}
-            <div className="flex items-center gap-1.5">
+            <div className="flex items-center gap-1.5 flex-wrap min-w-0">
               <span className="text-xs text-slate-500 shrink-0">Status:</span>
               <select
                 value={invoice.status}
                 onChange={(e) => onChange({ status: e.target.value as InvoiceData['status'] })}
-                className="h-7 text-xs font-medium bg-slate-50 border border-slate-200 rounded-md px-2 text-slate-800 hover:bg-slate-100 cursor-pointer focus:outline-none"
+                className="h-7 text-xs font-medium bg-slate-50 border border-slate-200 rounded-md px-2 text-slate-800 hover:bg-slate-100 cursor-pointer focus:outline-none flex-1 sm:flex-initial min-w-[90px]"
                 aria-label="Invoice Status"
               >
                 <option value="draft">Draft</option>

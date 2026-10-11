@@ -101,25 +101,25 @@ export const InvoiceSheet: React.FC<InvoiceSheetProps> = ({
   };
 
   return (
-    <div className="w-full flex justify-center pb-16">
+    <div className="w-full flex justify-center pb-16 min-w-0">
       {/* Paper Invoice Container */}
-      <div className="print-invoice-sheet w-full max-w-[860px] bg-white rounded-2xl border border-slate-200/90 shadow-xl print:shadow-none print:border-none p-4 sm:p-8 md:p-12 transition-all">
+      <div className="print-invoice-sheet w-full max-w-[860px] bg-white rounded-2xl border border-slate-200/90 shadow-xl print:shadow-none print:border-none p-3.5 sm:p-8 md:p-12 transition-all min-w-0">
         {/* ======================================================== */}
         {/* HEADER SECTION: Business Name, Logo, Invoice #, Dates, Client */}
         {/* ======================================================== */}
-        <div className="border-b border-slate-200 pb-6 sm:pb-7 print:pb-5">
-          <div className="flex flex-col sm:flex-row sm:items-start justify-between gap-5 sm:gap-6 print-row">
+        <div className="border-b border-slate-200 pb-6 sm:pb-7 print:pb-5 min-w-0">
+          <div className="flex flex-col sm:flex-row sm:items-start justify-between gap-5 sm:gap-6 print-row min-w-0">
             {/* Left Header: Business Logo & Details */}
-            <div className="space-y-3 max-w-sm w-full">
+            <div className="space-y-3 max-w-sm w-full min-w-0">
               {/* Logo / Brand Mark */}
-              <div className="flex items-center gap-3">
+              <div className="flex items-center gap-3 min-w-0">
                 {invoice.business.logo ? (
-                  <div className="relative group inline-block">
+                  <div className="relative group inline-block max-w-full">
                     <img
                       src={invoice.business.logo}
                       alt={invoice.business.name || 'Business Logo'}
                       referrerPolicy="no-referrer"
-                      className="h-16 sm:h-20 max-h-24 w-auto max-w-[220px] sm:max-w-[280px] print:max-h-20 print:max-w-[240px] object-contain rounded-xl shadow-2xs"
+                      className="h-16 sm:h-20 max-h-24 w-auto max-w-[200px] sm:max-w-[280px] print:max-h-20 print:max-w-[240px] object-contain rounded-xl shadow-2xs"
                     />
                     <button
                       type="button"
@@ -133,16 +133,16 @@ export const InvoiceSheet: React.FC<InvoiceSheetProps> = ({
                   <button
                     type="button"
                     onClick={onOpenLogoModal}
-                    className="no-print flex items-center gap-2.5 px-3.5 py-2 sm:px-4 sm:py-2.5 border-2 border-dashed border-slate-300 hover:border-slate-800 rounded-xl text-slate-600 hover:text-slate-900 hover:bg-slate-50 transition-all text-xs sm:text-sm font-semibold cursor-pointer shadow-2xs"
+                    className="no-print flex items-center gap-2.5 px-3.5 py-2 sm:px-4 sm:py-2.5 border-2 border-dashed border-slate-300 hover:border-slate-800 rounded-xl text-slate-600 hover:text-slate-900 hover:bg-slate-50 transition-all text-xs sm:text-sm font-semibold cursor-pointer shadow-2xs max-w-full"
                   >
-                    <ImageIcon className="w-4.5 h-4.5 text-slate-500" />
-                    <span>+ Add Business Logo</span>
+                    <ImageIcon className="w-4.5 h-4.5 text-slate-500 shrink-0" />
+                    <span className="truncate">+ Add Business Logo</span>
                   </button>
                 )}
               </div>
 
               {/* Business Name - Screen edit & Print view */}
-              <div>
+              <div className="min-w-0">
                 <input
                   type="text"
                   value={invoice.business.name}
@@ -152,7 +152,7 @@ export const InvoiceSheet: React.FC<InvoiceSheetProps> = ({
                     })
                   }
                   placeholder="Your Business Name"
-                  className="no-print w-full text-xl sm:text-2xl font-bold text-slate-900 placeholder:text-slate-300 border border-transparent hover:border-slate-200 focus:border-slate-400 focus:bg-slate-50/50 rounded-lg px-2 py-0.5 focus:outline-none transition-colors"
+                  className="no-print w-full text-xl sm:text-2xl font-bold text-slate-900 placeholder:text-slate-300 border border-transparent hover:border-slate-200 focus:border-slate-400 focus:bg-slate-50/50 rounded-lg px-2 py-0.5 focus:outline-none transition-colors min-w-0"
                 />
                 <div className="hidden print:block text-xl font-bold text-slate-900 tracking-tight leading-snug">
                   {invoice.business.name || 'Your Business Name'}
@@ -160,7 +160,7 @@ export const InvoiceSheet: React.FC<InvoiceSheetProps> = ({
               </div>
 
               {/* Business Contact Lines - Screen edit & Print view */}
-              <div className="no-print space-y-1 text-xs text-slate-600 leading-relaxed">
+              <div className="no-print space-y-1 text-xs text-slate-600 leading-relaxed min-w-0">
                 <input
                   type="text"
                   value={invoice.business.address}
@@ -170,7 +170,7 @@ export const InvoiceSheet: React.FC<InvoiceSheetProps> = ({
                     })
                   }
                   placeholder="Street Address"
-                  className="w-full text-slate-600 placeholder:text-slate-300 border border-transparent hover:border-slate-200 focus:border-slate-300 rounded px-1.5 py-0.5 focus:outline-none"
+                  className="w-full text-slate-600 placeholder:text-slate-300 border border-transparent hover:border-slate-200 focus:border-slate-300 rounded px-1.5 py-0.5 focus:outline-none min-w-0"
                 />
                 <input
                   type="text"
@@ -181,9 +181,9 @@ export const InvoiceSheet: React.FC<InvoiceSheetProps> = ({
                     })
                   }
                   placeholder="City, State, ZIP Code"
-                  className="w-full text-slate-600 placeholder:text-slate-300 border border-transparent hover:border-slate-200 focus:border-slate-300 rounded px-1.5 py-0.5 focus:outline-none"
+                  className="w-full text-slate-600 placeholder:text-slate-300 border border-transparent hover:border-slate-200 focus:border-slate-300 rounded px-1.5 py-0.5 focus:outline-none min-w-0"
                 />
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-1.5 sm:gap-2">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-1.5 sm:gap-2 min-w-0">
                   <input
                     type="email"
                     value={invoice.business.email}
@@ -193,7 +193,7 @@ export const InvoiceSheet: React.FC<InvoiceSheetProps> = ({
                       })
                     }
                     placeholder="billing@yourbusiness.com"
-                    className="w-full text-slate-600 placeholder:text-slate-300 border border-transparent hover:border-slate-200 focus:border-slate-300 rounded px-1.5 py-0.5 focus:outline-none"
+                    className="w-full text-slate-600 placeholder:text-slate-300 border border-transparent hover:border-slate-200 focus:border-slate-300 rounded px-1.5 py-0.5 focus:outline-none min-w-0"
                   />
                   <input
                     type="text"
@@ -204,11 +204,11 @@ export const InvoiceSheet: React.FC<InvoiceSheetProps> = ({
                       })
                     }
                     placeholder="+1 (555) 000-0000"
-                    className="w-full text-slate-600 placeholder:text-slate-300 border border-transparent hover:border-slate-200 focus:border-slate-300 rounded px-1.5 py-0.5 focus:outline-none"
+                    className="w-full text-slate-600 placeholder:text-slate-300 border border-transparent hover:border-slate-200 focus:border-slate-300 rounded px-1.5 py-0.5 focus:outline-none min-w-0"
                   />
                 </div>
                 {invoice.business.taxId && (
-                  <div className="flex items-center gap-1.5 pt-0.5">
+                  <div className="flex items-center gap-1.5 pt-0.5 min-w-0">
                     <span className="text-[11px] text-slate-400 uppercase tracking-wider shrink-0">Tax ID:</span>
                     <input
                       type="text"
@@ -219,7 +219,7 @@ export const InvoiceSheet: React.FC<InvoiceSheetProps> = ({
                         })
                       }
                       placeholder="e.g. US-EIN-94-3829104"
-                      className="w-full text-xs font-mono text-slate-700 placeholder:text-slate-300 border border-transparent hover:border-slate-200 focus:border-slate-300 rounded px-1 py-0.5 focus:outline-none"
+                      className="w-full text-xs font-mono text-slate-700 placeholder:text-slate-300 border border-transparent hover:border-slate-200 focus:border-slate-300 rounded px-1 py-0.5 focus:outline-none min-w-0"
                     />
                   </div>
                 )}
@@ -244,7 +244,7 @@ export const InvoiceSheet: React.FC<InvoiceSheetProps> = ({
             </div>
 
             {/* Right Header: Document Title & Metadata */}
-            <div className="sm:text-right print-text-right space-y-2.5 min-w-[220px]">
+            <div className="sm:text-right print-text-right space-y-2.5 sm:min-w-[220px] w-full sm:w-auto min-w-0">
               <div className="flex sm:justify-end print:justify-end items-center gap-2">
                 <span
                   className="text-2xl sm:text-3xl font-extrabold tracking-tight"
@@ -253,7 +253,7 @@ export const InvoiceSheet: React.FC<InvoiceSheetProps> = ({
                   INVOICE
                 </span>
                 {invoice.status === 'paid' && (
-                  <span className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-xs font-bold uppercase tracking-wider bg-emerald-100 text-emerald-800 border border-emerald-300">
+                  <span className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-xs font-bold uppercase tracking-wider bg-emerald-100 text-emerald-800 border border-emerald-300 shrink-0">
                     <CheckCircle2 className="w-3.5 h-3.5" />
                     PAID
                   </span>
@@ -261,8 +261,8 @@ export const InvoiceSheet: React.FC<InvoiceSheetProps> = ({
               </div>
 
               {/* Invoice Metadata Screen Form */}
-              <div className="no-print space-y-2">
-                <div className="flex items-center justify-between sm:justify-end gap-2">
+              <div className="no-print space-y-2 min-w-0">
+                <div className="flex items-center justify-between sm:justify-end gap-2 min-w-0">
                   <span className="text-xs font-semibold text-slate-500 uppercase tracking-wider shrink-0">
                     Invoice #:
                   </span>
@@ -271,45 +271,45 @@ export const InvoiceSheet: React.FC<InvoiceSheetProps> = ({
                     value={invoice.invoiceNumber}
                     onChange={(e) => onChange({ invoiceNumber: e.target.value })}
                     placeholder="INV-001"
-                    className="font-mono font-semibold text-sm text-slate-900 border border-transparent hover:border-slate-200 focus:border-slate-300 rounded px-2 py-0.5 text-right w-36 focus:outline-none"
+                    className="font-mono font-semibold text-sm text-slate-900 border border-transparent hover:border-slate-200 focus:border-slate-300 rounded px-2 py-0.5 text-right w-28 sm:w-36 focus:outline-none min-w-0"
                   />
                 </div>
 
-                <div className="space-y-1.5 text-xs">
-                  <div className="flex items-center justify-between sm:justify-end gap-2">
+                <div className="space-y-1.5 text-xs min-w-0">
+                  <div className="flex items-center justify-between sm:justify-end gap-2 min-w-0">
                     <span className="text-slate-500 font-medium flex items-center gap-1 shrink-0">
-                      <Calendar className="w-3.5 h-3.5 text-slate-400 no-print" />
+                      <Calendar className="w-3.5 h-3.5 text-slate-400 no-print shrink-0" />
                       <span>Issue Date:</span>
                     </span>
                     <input
                       type="date"
                       value={invoice.issueDate}
                       onChange={(e) => onChange({ issueDate: e.target.value })}
-                      className="font-mono text-xs text-slate-800 border border-transparent hover:border-slate-200 focus:border-slate-300 rounded px-2 py-0.5 focus:outline-none"
+                      className="font-mono text-xs text-slate-800 border border-transparent hover:border-slate-200 focus:border-slate-300 rounded px-2 py-0.5 focus:outline-none min-w-0 max-w-[140px] sm:max-w-none text-right"
                     />
                   </div>
 
-                  <div className="flex items-center justify-between sm:justify-end gap-2">
+                  <div className="flex items-center justify-between sm:justify-end gap-2 min-w-0">
                     <span className="text-slate-500 font-medium flex items-center gap-1 shrink-0">
-                      <Calendar className="w-3.5 h-3.5 text-slate-400 no-print" />
+                      <Calendar className="w-3.5 h-3.5 text-slate-400 no-print shrink-0" />
                       <span>Due Date:</span>
                     </span>
                     <input
                       type="date"
                       value={invoice.dueDate}
                       onChange={(e) => onChange({ dueDate: e.target.value })}
-                      className="font-mono text-xs font-semibold text-slate-900 border border-transparent hover:border-slate-200 focus:border-slate-300 rounded px-2 py-0.5 focus:outline-none"
+                      className="font-mono text-xs font-semibold text-slate-900 border border-transparent hover:border-slate-200 focus:border-slate-300 rounded px-2 py-0.5 focus:outline-none min-w-0 max-w-[140px] sm:max-w-none text-right"
                     />
                   </div>
 
-                  <div className="flex items-center justify-between sm:justify-end gap-2">
+                  <div className="flex items-center justify-between sm:justify-end gap-2 min-w-0">
                     <span className="text-slate-500 font-medium shrink-0">Terms:</span>
                     <input
                       type="text"
                       value={invoice.paymentTerms}
                       onChange={(e) => onChange({ paymentTerms: e.target.value })}
                       placeholder="Net 30"
-                      className="text-xs text-slate-700 border border-transparent hover:border-slate-200 focus:border-slate-300 rounded px-2 py-0.5 text-right w-24 focus:outline-none"
+                      className="text-xs text-slate-700 border border-transparent hover:border-slate-200 focus:border-slate-300 rounded px-2 py-0.5 text-right w-24 sm:w-28 focus:outline-none min-w-0"
                     />
                   </div>
                 </div>
@@ -340,15 +340,15 @@ export const InvoiceSheet: React.FC<InvoiceSheetProps> = ({
           </div>
 
           {/* Bill To / Client Section */}
-          <div className="mt-6 sm:mt-7 pt-5 border-t border-slate-100 flex flex-col sm:flex-row gap-5 sm:gap-6 justify-between print-row">
-            <div className="max-w-md w-full">
+          <div className="mt-6 sm:mt-7 pt-5 border-t border-slate-100 flex flex-col sm:flex-row gap-5 sm:gap-6 justify-between print-row min-w-0">
+            <div className="max-w-md w-full min-w-0">
               <div className="flex items-center gap-1.5 text-xs font-bold uppercase tracking-wider text-slate-400 mb-2">
-                <Building2 className="w-3.5 h-3.5 no-print" />
+                <Building2 className="w-3.5 h-3.5 no-print shrink-0" />
                 <span>Billed To (Client Details)</span>
               </div>
 
               {/* Client Edit View for Screen */}
-              <div className="no-print space-y-1 text-xs leading-relaxed">
+              <div className="no-print space-y-1 text-xs leading-relaxed min-w-0">
                 <input
                   type="text"
                   value={invoice.client.name}
@@ -358,7 +358,7 @@ export const InvoiceSheet: React.FC<InvoiceSheetProps> = ({
                     })
                   }
                   placeholder="Client Contact Name"
-                  className="w-full font-semibold text-sm text-slate-900 placeholder:text-slate-300 border border-transparent hover:border-slate-200 focus:border-slate-300 rounded px-1.5 py-0.5 focus:outline-none"
+                  className="w-full font-semibold text-sm text-slate-900 placeholder:text-slate-300 border border-transparent hover:border-slate-200 focus:border-slate-300 rounded px-1.5 py-0.5 focus:outline-none min-w-0"
                 />
                 <input
                   type="text"
@@ -369,7 +369,7 @@ export const InvoiceSheet: React.FC<InvoiceSheetProps> = ({
                     })
                   }
                   placeholder="Client Organization / Company"
-                  className="w-full text-slate-700 font-medium placeholder:text-slate-300 border border-transparent hover:border-slate-200 focus:border-slate-300 rounded px-1.5 py-0.5 focus:outline-none"
+                  className="w-full text-slate-700 font-medium placeholder:text-slate-300 border border-transparent hover:border-slate-200 focus:border-slate-300 rounded px-1.5 py-0.5 focus:outline-none min-w-0"
                 />
                 <input
                   type="text"
@@ -380,7 +380,7 @@ export const InvoiceSheet: React.FC<InvoiceSheetProps> = ({
                     })
                   }
                   placeholder="Client Street Address"
-                  className="w-full text-slate-600 placeholder:text-slate-300 border border-transparent hover:border-slate-200 focus:border-slate-300 rounded px-1.5 py-0.5 focus:outline-none"
+                  className="w-full text-slate-600 placeholder:text-slate-300 border border-transparent hover:border-slate-200 focus:border-slate-300 rounded px-1.5 py-0.5 focus:outline-none min-w-0"
                 />
                 <input
                   type="text"
@@ -391,9 +391,9 @@ export const InvoiceSheet: React.FC<InvoiceSheetProps> = ({
                     })
                   }
                   placeholder="Client City, State, ZIP"
-                  className="w-full text-slate-600 placeholder:text-slate-300 border border-transparent hover:border-slate-200 focus:border-slate-300 rounded px-1.5 py-0.5 focus:outline-none"
+                  className="w-full text-slate-600 placeholder:text-slate-300 border border-transparent hover:border-slate-200 focus:border-slate-300 rounded px-1.5 py-0.5 focus:outline-none min-w-0"
                 />
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-1.5 sm:gap-2 pt-0.5">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-1.5 sm:gap-2 pt-0.5 min-w-0">
                   <input
                     type="email"
                     value={invoice.client.email}
@@ -403,7 +403,7 @@ export const InvoiceSheet: React.FC<InvoiceSheetProps> = ({
                       })
                     }
                     placeholder="client@company.com"
-                    className="w-full text-slate-600 placeholder:text-slate-300 border border-transparent hover:border-slate-200 focus:border-slate-300 rounded px-1.5 py-0.5 focus:outline-none"
+                    className="w-full text-slate-600 placeholder:text-slate-300 border border-transparent hover:border-slate-200 focus:border-slate-300 rounded px-1.5 py-0.5 focus:outline-none min-w-0"
                   />
                   <input
                     type="text"
@@ -414,7 +414,7 @@ export const InvoiceSheet: React.FC<InvoiceSheetProps> = ({
                       })
                     }
                     placeholder="Client Phone Number"
-                    className="w-full text-slate-600 placeholder:text-slate-300 border border-transparent hover:border-slate-200 focus:border-slate-300 rounded px-1.5 py-0.5 focus:outline-none"
+                    className="w-full text-slate-600 placeholder:text-slate-300 border border-transparent hover:border-slate-200 focus:border-slate-300 rounded px-1.5 py-0.5 focus:outline-none min-w-0"
                   />
                 </div>
               </div>
@@ -438,11 +438,11 @@ export const InvoiceSheet: React.FC<InvoiceSheetProps> = ({
             </div>
 
             {/* Currency Banner / Badge */}
-            <div className="self-start sm:self-end print:self-end text-left sm:text-right print-text-right text-xs text-slate-500 mt-2 sm:mt-0">
+            <div className="self-start sm:self-end print:self-end text-left sm:text-right print-text-right text-xs text-slate-500 mt-2 sm:mt-0 min-w-0 max-w-full">
               <span className="text-slate-400 block text-[11px] uppercase tracking-wider mb-1">
                 Base Currency
               </span>
-              <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-md bg-slate-50 border border-slate-200 font-mono font-semibold text-slate-800 print:bg-transparent print:border-none print:p-0">
+              <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-md bg-slate-50 border border-slate-200 font-mono font-semibold text-slate-800 print:bg-transparent print:border-none print:p-0 flex-wrap max-w-full">
                 <span>{CURRENCIES[invoice.currency].symbol}</span>
                 <span>{invoice.currency}</span>
                 <span className="text-slate-400 font-normal">({CURRENCIES[invoice.currency].name})</span>
@@ -574,15 +574,15 @@ export const InvoiceSheet: React.FC<InvoiceSheetProps> = ({
           </div>
 
           {/* Desktop & Tablet Table (and ALWAYS used in print) */}
-          <div className="hidden sm:block print:block overflow-x-auto">
-            <table className="w-full border-collapse">
+          <div className="hidden sm:block print:block overflow-x-auto min-w-0">
+            <table className="w-full min-w-[560px] print:min-w-0 border-collapse">
               <thead>
                 <tr className="border-b-2 border-slate-900 text-left text-xs font-bold uppercase tracking-wider text-slate-900">
-                  <th className="py-3 px-3 w-[52%]">Item & Description</th>
-                  <th className="py-3 px-3 text-right w-[15%]">Hours / Qty</th>
-                  <th className="py-3 px-3 text-right w-[16%]">Rate</th>
-                  <th className="py-3 px-3 text-right w-[17%]">Subtotal</th>
-                  <th className="py-3 px-1 text-center w-[40px] no-print"></th>
+                  <th className="py-3 px-3">Item & Description</th>
+                  <th className="py-3 px-3 text-right w-24">Hours / Qty</th>
+                  <th className="py-3 px-3 text-right w-28">Rate</th>
+                  <th className="py-3 px-3 text-right w-28">Subtotal</th>
+                  <th className="py-3 px-1 text-center w-24 no-print"></th>
                 </tr>
               </thead>
               <tbody className="divide-y divide-slate-100 print:divide-slate-200 text-xs">
@@ -659,8 +659,8 @@ export const InvoiceSheet: React.FC<InvoiceSheetProps> = ({
                       </td>
 
                       {/* Row Action Controls (hidden on print) */}
-                      <td className="py-3 px-1 text-center align-top no-print">
-                        <div className="flex items-center justify-center gap-1 opacity-0 group-hover:opacity-100 transition-opacity">
+                      <td className="py-3 px-1 text-center align-top no-print w-24">
+                        <div className="flex items-center justify-center gap-0.5 opacity-80 sm:opacity-0 group-hover:opacity-100 transition-opacity">
                           <button
                             type="button"
                             onClick={() => handleDuplicateItem(index)}
@@ -723,10 +723,10 @@ export const InvoiceSheet: React.FC<InvoiceSheetProps> = ({
         {/* ======================================================== */}
         {/* FINANCIAL SUMMARY & TOTALS */}
         {/* ======================================================== */}
-        <div className="mt-6 sm:mt-7 pt-5 border-t border-slate-200 flex flex-col md:flex-row justify-between gap-6 print-row page-break-inside-avoid">
+        <div className="mt-6 sm:mt-7 pt-5 border-t border-slate-200 flex flex-col md:flex-row justify-between gap-6 print-row page-break-inside-avoid min-w-0">
           {/* Notes & Terms Section (Left Column) */}
-          <div className="flex-1 space-y-4">
-            <div>
+          <div className="flex-1 space-y-4 min-w-0 w-full">
+            <div className="min-w-0">
               <label className="block text-xs font-bold uppercase tracking-wider text-slate-400 mb-1">
                 Notes / Memo
               </label>
@@ -738,11 +738,11 @@ export const InvoiceSheet: React.FC<InvoiceSheetProps> = ({
                 value={invoice.notes}
                 onChange={(e) => onChange({ notes: e.target.value })}
                 placeholder="Notes to the client (e.g. thank you message or delivery info)..."
-                className="no-print w-full text-xs text-slate-700 placeholder:text-slate-300 border border-slate-100 hover:border-slate-200 focus:border-slate-300 rounded-lg p-2.5 focus:outline-none transition-colors leading-relaxed"
+                className="no-print w-full text-xs text-slate-700 placeholder:text-slate-300 border border-slate-100 hover:border-slate-200 focus:border-slate-300 rounded-lg p-2.5 focus:outline-none transition-colors leading-relaxed min-w-0"
               />
             </div>
 
-            <div>
+            <div className="min-w-0">
               <label className="block text-xs font-bold uppercase tracking-wider text-slate-400 mb-1">
                 Payment Terms & Conditions
               </label>
@@ -754,15 +754,15 @@ export const InvoiceSheet: React.FC<InvoiceSheetProps> = ({
                 value={invoice.terms}
                 onChange={(e) => onChange({ terms: e.target.value })}
                 placeholder="Payment terms, late fee policy, or return terms..."
-                className="no-print w-full text-xs text-slate-600 placeholder:text-slate-300 border border-slate-100 hover:border-slate-200 focus:border-slate-300 rounded-lg p-2.5 focus:outline-none transition-colors leading-relaxed"
+                className="no-print w-full text-xs text-slate-600 placeholder:text-slate-300 border border-slate-100 hover:border-slate-200 focus:border-slate-300 rounded-lg p-2.5 focus:outline-none transition-colors leading-relaxed min-w-0"
               />
             </div>
           </div>
 
           {/* Totals Breakdown (Right Column) */}
-          <div className="w-full md:w-80 print:w-72 space-y-2.5">
+          <div className="w-full md:w-80 print:w-72 space-y-2.5 min-w-0">
             {/* Subtotal */}
-            <div className="flex items-center justify-between text-xs text-slate-600 py-1">
+            <div className="flex items-center justify-between text-xs text-slate-600 py-1 min-w-0">
               <span>Subtotal:</span>
               <span className="font-mono font-medium tabular-nums text-slate-800">
                 {formatCurrency(subtotal, invoice.currency)}
@@ -770,8 +770,8 @@ export const InvoiceSheet: React.FC<InvoiceSheetProps> = ({
             </div>
 
             {/* Discount Configurable Row */}
-            <div className="flex items-center justify-between text-xs py-1">
-              <div className="flex items-center gap-1.5 text-slate-600">
+            <div className="flex items-center justify-between text-xs py-1 min-w-0">
+              <div className="flex items-center gap-1.5 text-slate-600 min-w-0">
                 <span>Discount:</span>
                 <div className="inline-flex items-center gap-0.5 no-print">
                   <input
@@ -798,8 +798,8 @@ export const InvoiceSheet: React.FC<InvoiceSheetProps> = ({
             </div>
 
             {/* Tax Configurable Row */}
-            <div className="flex items-center justify-between text-xs py-1">
-              <div className="flex items-center gap-1.5 text-slate-600">
+            <div className="flex items-center justify-between text-xs py-1 min-w-0">
+              <div className="flex items-center gap-1.5 text-slate-600 min-w-0">
                 <span>Tax:</span>
                 <div className="inline-flex items-center gap-0.5 no-print">
                   <input
@@ -825,7 +825,7 @@ export const InvoiceSheet: React.FC<InvoiceSheetProps> = ({
 
             {/* Final Total Display */}
             <div
-              className="mt-3 pt-2.5 border-t-2 border-slate-900 flex items-baseline justify-between"
+              className="mt-3 pt-2.5 border-t-2 border-slate-900 flex items-baseline justify-between flex-wrap gap-2 min-w-0"
               style={{ borderColor: activeTheme.hex }}
             >
               <div className="space-y-0.5">
@@ -849,17 +849,17 @@ export const InvoiceSheet: React.FC<InvoiceSheetProps> = ({
         {/* ======================================================== */}
         {/* PAYMENT INSTRUCTIONS SECTION */}
         {/* ======================================================== */}
-        <div className="mt-6 sm:mt-7 pt-5 border-t border-slate-200 page-break-inside-avoid">
-          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2.5 mb-3">
-            <div className="flex items-center gap-1.5">
-              <CreditCard className="w-4 h-4 text-slate-600 no-print" />
+        <div className="mt-6 sm:mt-7 pt-5 border-t border-slate-200 page-break-inside-avoid min-w-0">
+          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2.5 mb-3 min-w-0">
+            <div className="flex items-center gap-1.5 min-w-0">
+              <CreditCard className="w-4 h-4 text-slate-600 no-print shrink-0" />
               <h4 className="text-xs font-bold uppercase tracking-wider text-slate-900">
                 Payment Instructions
               </h4>
             </div>
 
             {/* Payment Method Selector (no-print) */}
-            <div className="no-print flex flex-wrap gap-1 bg-slate-100 p-1 rounded-lg">
+            <div className="no-print flex flex-wrap gap-1 bg-slate-100 p-1 rounded-lg min-w-0">
               <button
                 type="button"
                 onClick={() => handlePaymentMethodChange('bank')}
@@ -973,10 +973,10 @@ export const InvoiceSheet: React.FC<InvoiceSheetProps> = ({
           </div>
 
           {/* Payment Detail Interactive Card (Screen Only) */}
-          <div className="no-print bg-slate-50/80 rounded-xl border border-slate-200/80 p-3.5 sm:p-4 text-xs">
+          <div className="no-print bg-slate-50/80 rounded-xl border border-slate-200/80 p-3.5 sm:p-4 text-xs min-w-0">
             {activePaymentTab === 'bank' && (
-              <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-3 sm:gap-3.5">
-                <div>
+              <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-3 sm:gap-3.5 min-w-0">
+                <div className="min-w-0">
                   <span className="text-[11px] text-slate-400 uppercase tracking-wider block mb-0.5">Bank Name</span>
                   <input
                     type="text"
@@ -990,10 +990,10 @@ export const InvoiceSheet: React.FC<InvoiceSheetProps> = ({
                       })
                     }
                     placeholder="e.g. JPMorgan Chase"
-                    className="w-full font-semibold text-slate-800 border border-transparent hover:border-slate-200 focus:border-slate-300 rounded px-1 py-0.5 focus:outline-none"
+                    className="w-full font-semibold text-slate-800 border border-transparent hover:border-slate-200 focus:border-slate-300 rounded px-1 py-0.5 focus:outline-none min-w-0"
                   />
                 </div>
-                <div>
+                <div className="min-w-0">
                   <span className="text-[11px] text-slate-400 uppercase tracking-wider block mb-0.5">Account Name</span>
                   <input
                     type="text"
@@ -1007,10 +1007,10 @@ export const InvoiceSheet: React.FC<InvoiceSheetProps> = ({
                       })
                     }
                     placeholder="e.g. Apex Studio LLC"
-                    className="w-full text-slate-800 border border-transparent hover:border-slate-200 focus:border-slate-300 rounded px-1 py-0.5 focus:outline-none"
+                    className="w-full text-slate-800 border border-transparent hover:border-slate-200 focus:border-slate-300 rounded px-1 py-0.5 focus:outline-none min-w-0"
                   />
                 </div>
-                <div>
+                <div className="min-w-0">
                   <span className="text-[11px] text-slate-400 uppercase tracking-wider block mb-0.5">Account # / IBAN</span>
                   <input
                     type="text"
@@ -1024,10 +1024,10 @@ export const InvoiceSheet: React.FC<InvoiceSheetProps> = ({
                       })
                     }
                     placeholder="e.g. 1234567890"
-                    className="w-full font-mono font-medium text-slate-800 border border-transparent hover:border-slate-200 focus:border-slate-300 rounded px-1 py-0.5 focus:outline-none"
+                    className="w-full font-mono font-medium text-slate-800 border border-transparent hover:border-slate-200 focus:border-slate-300 rounded px-1 py-0.5 focus:outline-none min-w-0"
                   />
                 </div>
-                <div>
+                <div className="min-w-0">
                   <span className="text-[11px] text-slate-400 uppercase tracking-wider block mb-0.5">Routing # / IFSC</span>
                   <input
                     type="text"
@@ -1041,10 +1041,10 @@ export const InvoiceSheet: React.FC<InvoiceSheetProps> = ({
                       })
                     }
                     placeholder="e.g. 021000021"
-                    className="w-full font-mono text-slate-800 border border-transparent hover:border-slate-200 focus:border-slate-300 rounded px-1 py-0.5 focus:outline-none"
+                    className="w-full font-mono text-slate-800 border border-transparent hover:border-slate-200 focus:border-slate-300 rounded px-1 py-0.5 focus:outline-none min-w-0"
                   />
                 </div>
-                <div>
+                <div className="min-w-0">
                   <span className="text-[11px] text-slate-400 uppercase tracking-wider block mb-0.5">SWIFT / BIC Code</span>
                   <input
                     type="text"
@@ -1058,10 +1058,10 @@ export const InvoiceSheet: React.FC<InvoiceSheetProps> = ({
                       })
                     }
                     placeholder="e.g. CHASUS33"
-                    className="w-full font-mono text-slate-800 border border-transparent hover:border-slate-200 focus:border-slate-300 rounded px-1 py-0.5 focus:outline-none"
+                    className="w-full font-mono text-slate-800 border border-transparent hover:border-slate-200 focus:border-slate-300 rounded px-1 py-0.5 focus:outline-none min-w-0"
                   />
                 </div>
-                <div>
+                <div className="min-w-0">
                   <span className="text-[11px] text-slate-400 uppercase tracking-wider block mb-0.5">Wire Memo / Notes</span>
                   <input
                     type="text"
@@ -1075,14 +1075,14 @@ export const InvoiceSheet: React.FC<InvoiceSheetProps> = ({
                       })
                     }
                     placeholder="Reference invoice # in transfer"
-                    className="w-full text-slate-700 border border-transparent hover:border-slate-200 focus:border-slate-300 rounded px-1 py-0.5 focus:outline-none"
+                    className="w-full text-slate-700 border border-transparent hover:border-slate-200 focus:border-slate-300 rounded px-1 py-0.5 focus:outline-none min-w-0"
                   />
                 </div>
               </div>
             )}
 
             {activePaymentTab === 'stripe' && (
-              <div className="space-y-2">
+              <div className="space-y-2 min-w-0">
                 <span className="text-[11px] text-slate-400 uppercase tracking-wider block">
                   Stripe Payment Link / Customer Portal
                 </span>
@@ -1098,7 +1098,7 @@ export const InvoiceSheet: React.FC<InvoiceSheetProps> = ({
                     })
                   }
                   placeholder="https://buy.stripe.com/..."
-                  className="w-full font-mono text-xs text-blue-600 underline border border-transparent hover:border-slate-200 focus:border-slate-300 rounded px-1.5 py-0.5 focus:outline-none"
+                  className="w-full font-mono text-xs text-blue-600 underline border border-transparent hover:border-slate-200 focus:border-slate-300 rounded px-1.5 py-0.5 focus:outline-none min-w-0"
                 />
                 <p className="text-[11px] text-slate-500">
                   Clients can click or navigate directly to this Stripe checkout link to remit payment via credit card or Apple Pay.
@@ -1107,7 +1107,7 @@ export const InvoiceSheet: React.FC<InvoiceSheetProps> = ({
             )}
 
             {activePaymentTab === 'paypal' && (
-              <div className="space-y-2">
+              <div className="space-y-2 min-w-0">
                 <span className="text-[11px] text-slate-400 uppercase tracking-wider block">
                   PayPal Email / PayPal.me Link
                 </span>
@@ -1123,7 +1123,7 @@ export const InvoiceSheet: React.FC<InvoiceSheetProps> = ({
                     })
                   }
                   placeholder="payments@yourbusiness.com or paypal.me/yourusername"
-                  className="w-full font-mono text-xs text-slate-800 border border-transparent hover:border-slate-200 focus:border-slate-300 rounded px-1.5 py-0.5 focus:outline-none"
+                  className="w-full font-mono text-xs text-slate-800 border border-transparent hover:border-slate-200 focus:border-slate-300 rounded px-1.5 py-0.5 focus:outline-none min-w-0"
                 />
                 <p className="text-[11px] text-slate-500">
                   Please send funds to the above PayPal address.
@@ -1132,7 +1132,7 @@ export const InvoiceSheet: React.FC<InvoiceSheetProps> = ({
             )}
 
             {activePaymentTab === 'custom' && (
-              <div>
+              <div className="min-w-0">
                 <span className="text-[11px] text-slate-400 uppercase tracking-wider block mb-1">
                   Custom Payment Instructions
                 </span>
@@ -1148,7 +1148,7 @@ export const InvoiceSheet: React.FC<InvoiceSheetProps> = ({
                     })
                   }
                   placeholder="Enter custom instructions (e.g. check remittance address, Wise, UPI, crypto wallet)..."
-                  className="w-full text-xs text-slate-800 border border-transparent hover:border-slate-200 focus:border-slate-300 rounded px-1.5 py-0.5 focus:outline-none leading-relaxed"
+                  className="w-full text-xs text-slate-800 border border-transparent hover:border-slate-200 focus:border-slate-300 rounded px-1.5 py-0.5 focus:outline-none leading-relaxed min-w-0"
                 />
               </div>
             )}

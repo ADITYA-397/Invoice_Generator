@@ -176,7 +176,7 @@ export default function App() {
   };
 
   return (
-    <div className="min-h-screen bg-slate-100/70 text-slate-900 flex flex-col font-sans">
+    <div className="min-h-screen bg-slate-100/70 text-slate-900 flex flex-col font-sans w-full max-w-full overflow-x-hidden">
       {/* Top Bar Contract Navigation */}
       <HeaderNav
         onDownloadPdf={handleDownloadPdf}
@@ -193,15 +193,15 @@ export default function App() {
       />
 
       {/* Main Workspace Area */}
-      <main className="flex-1 max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-6">
+      <main className="flex-1 max-w-7xl w-full mx-auto px-2.5 sm:px-6 lg:px-8 py-4 sm:py-6 min-w-0">
         {/* Quick Config Bar */}
         <QuickControls invoice={invoice} onChange={handleUpdateInvoice} />
 
         {/* Informational Tip Bar */}
-        <div className="no-print mb-4 sm:mb-6 flex flex-col sm:flex-row sm:items-center justify-between gap-2.5 text-xs text-slate-500 bg-white border border-slate-200/80 rounded-xl p-3 sm:px-4 sm:py-2.5 shadow-2xs">
-          <div className="flex items-start sm:items-center gap-2">
+        <div className="no-print mb-4 sm:mb-6 flex flex-col sm:flex-row sm:items-center justify-between gap-2.5 text-xs text-slate-500 bg-white border border-slate-200/80 rounded-xl p-3 sm:px-4 sm:py-2.5 shadow-2xs min-w-0">
+          <div className="flex items-start sm:items-center gap-2 min-w-0">
             <span className="font-bold text-slate-800 shrink-0">Live Editor:</span>
-            <span className="text-slate-600 leading-snug">Click any text or number directly on the document sheet to edit in real time.</span>
+            <span className="text-slate-600 leading-snug break-words">Click any text or number directly on the document sheet to edit in real time.</span>
           </div>
           <button
             type="button"
@@ -215,7 +215,7 @@ export default function App() {
 
         {/* Print Tips Drawer (optional expandable) */}
         {showPrintTips && (
-          <div className="no-print mb-6 p-4 bg-emerald-50/70 border border-emerald-200/80 rounded-xl text-xs text-emerald-900 relative">
+          <div className="no-print mb-6 p-4 bg-emerald-50/70 border border-emerald-200/80 rounded-xl text-xs text-emerald-900 relative min-w-0">
             <button
               onClick={() => setShowPrintTips(false)}
               className="absolute top-3 right-3 text-emerald-700 hover:text-emerald-900 cursor-pointer"
@@ -242,14 +242,14 @@ export default function App() {
       </main>
 
       {/* Footer (Anti-Slop: Quiet copyright and clean action) */}
-      <footer className="no-print mt-auto border-t border-slate-200 bg-white py-4 text-xs text-slate-500">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row items-center justify-between gap-2">
+      <footer className="no-print mt-auto border-t border-slate-200 bg-white py-4 text-xs text-slate-500 w-full">
+        <div className="max-w-7xl mx-auto px-2.5 sm:px-6 lg:px-8 flex flex-col sm:flex-row items-center justify-between gap-2 text-center sm:text-left min-w-0">
           <div className="flex items-center gap-2">
             <span className="font-semibold text-slate-700">Invoicely</span>
             <span>·</span>
             <span>Interactive Professional Invoice Studio</span>
           </div>
-          <div className="flex items-center gap-4 text-slate-400">
+          <div className="flex items-center gap-3 sm:gap-4 text-slate-400 flex-wrap justify-center sm:justify-end">
             <span>Client-side auto-save enabled</span>
             <span>·</span>
             <button
