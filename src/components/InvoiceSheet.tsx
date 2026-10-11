@@ -103,12 +103,12 @@ export const InvoiceSheet: React.FC<InvoiceSheetProps> = ({
   return (
     <div className="w-full flex justify-center pb-16">
       {/* Paper Invoice Container */}
-      <div className="print-invoice-sheet w-full max-w-[860px] bg-white rounded-2xl border border-slate-200/90 shadow-xl print:shadow-none print:border-none p-6 sm:p-10 md:p-12 transition-all">
+      <div className="print-invoice-sheet w-full max-w-[860px] bg-white rounded-2xl border border-slate-200/90 shadow-xl print:shadow-none print:border-none p-4 sm:p-8 md:p-12 transition-all">
         {/* ======================================================== */}
         {/* HEADER SECTION: Business Name, Logo, Invoice #, Dates, Client */}
         {/* ======================================================== */}
-        <div className="border-b border-slate-200 pb-7 print:pb-5">
-          <div className="flex flex-col sm:flex-row sm:items-start justify-between gap-6 print-row">
+        <div className="border-b border-slate-200 pb-6 sm:pb-7 print:pb-5">
+          <div className="flex flex-col sm:flex-row sm:items-start justify-between gap-5 sm:gap-6 print-row">
             {/* Left Header: Business Logo & Details */}
             <div className="space-y-3 max-w-sm w-full">
               {/* Logo / Brand Mark */}
@@ -141,7 +141,7 @@ export const InvoiceSheet: React.FC<InvoiceSheetProps> = ({
                 )}
               </div>
 
-              {/* Business Name */}
+              {/* Business Name - Screen edit & Print view */}
               <div>
                 <input
                   type="text"
@@ -152,12 +152,15 @@ export const InvoiceSheet: React.FC<InvoiceSheetProps> = ({
                     })
                   }
                   placeholder="Your Business Name"
-                  className="w-full text-2xl font-bold text-slate-900 placeholder:text-slate-300 border border-transparent hover:border-slate-200 focus:border-slate-400 focus:bg-slate-50/50 rounded-lg px-2 py-0.5 -mx-2 focus:outline-none transition-colors"
+                  className="no-print w-full text-xl sm:text-2xl font-bold text-slate-900 placeholder:text-slate-300 border border-transparent hover:border-slate-200 focus:border-slate-400 focus:bg-slate-50/50 rounded-lg px-2 py-0.5 focus:outline-none transition-colors"
                 />
+                <div className="hidden print:block text-xl font-bold text-slate-900 tracking-tight leading-snug">
+                  {invoice.business.name || 'Your Business Name'}
+                </div>
               </div>
 
-              {/* Business Contact Lines */}
-              <div className="space-y-1 text-xs text-slate-600 leading-relaxed">
+              {/* Business Contact Lines - Screen edit & Print view */}
+              <div className="no-print space-y-1 text-xs text-slate-600 leading-relaxed">
                 <input
                   type="text"
                   value={invoice.business.address}
@@ -167,7 +170,7 @@ export const InvoiceSheet: React.FC<InvoiceSheetProps> = ({
                     })
                   }
                   placeholder="Street Address"
-                  className="w-full text-slate-600 placeholder:text-slate-300 border border-transparent hover:border-slate-200 focus:border-slate-300 rounded px-1.5 py-0.5 -mx-1.5 focus:outline-none"
+                  className="w-full text-slate-600 placeholder:text-slate-300 border border-transparent hover:border-slate-200 focus:border-slate-300 rounded px-1.5 py-0.5 focus:outline-none"
                 />
                 <input
                   type="text"
@@ -178,9 +181,9 @@ export const InvoiceSheet: React.FC<InvoiceSheetProps> = ({
                     })
                   }
                   placeholder="City, State, ZIP Code"
-                  className="w-full text-slate-600 placeholder:text-slate-300 border border-transparent hover:border-slate-200 focus:border-slate-300 rounded px-1.5 py-0.5 -mx-1.5 focus:outline-none"
+                  className="w-full text-slate-600 placeholder:text-slate-300 border border-transparent hover:border-slate-200 focus:border-slate-300 rounded px-1.5 py-0.5 focus:outline-none"
                 />
-                <div className="grid grid-cols-2 gap-2 print:flex print:gap-4">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-1.5 sm:gap-2">
                   <input
                     type="email"
                     value={invoice.business.email}
@@ -190,7 +193,7 @@ export const InvoiceSheet: React.FC<InvoiceSheetProps> = ({
                       })
                     }
                     placeholder="billing@yourbusiness.com"
-                    className="w-full text-slate-600 placeholder:text-slate-300 border border-transparent hover:border-slate-200 focus:border-slate-300 rounded px-1.5 py-0.5 -mx-1.5 focus:outline-none"
+                    className="w-full text-slate-600 placeholder:text-slate-300 border border-transparent hover:border-slate-200 focus:border-slate-300 rounded px-1.5 py-0.5 focus:outline-none"
                   />
                   <input
                     type="text"
@@ -201,12 +204,12 @@ export const InvoiceSheet: React.FC<InvoiceSheetProps> = ({
                       })
                     }
                     placeholder="+1 (555) 000-0000"
-                    className="w-full text-slate-600 placeholder:text-slate-300 border border-transparent hover:border-slate-200 focus:border-slate-300 rounded px-1.5 py-0.5 -mx-1.5 focus:outline-none"
+                    className="w-full text-slate-600 placeholder:text-slate-300 border border-transparent hover:border-slate-200 focus:border-slate-300 rounded px-1.5 py-0.5 focus:outline-none"
                   />
                 </div>
                 {invoice.business.taxId && (
                   <div className="flex items-center gap-1.5 pt-0.5">
-                    <span className="text-[11px] text-slate-400 uppercase tracking-wider">Tax ID / VAT:</span>
+                    <span className="text-[11px] text-slate-400 uppercase tracking-wider shrink-0">Tax ID:</span>
                     <input
                       type="text"
                       value={invoice.business.taxId}
@@ -216,8 +219,25 @@ export const InvoiceSheet: React.FC<InvoiceSheetProps> = ({
                         })
                       }
                       placeholder="e.g. US-EIN-94-3829104"
-                      className="text-xs font-mono text-slate-700 placeholder:text-slate-300 border border-transparent hover:border-slate-200 focus:border-slate-300 rounded px-1 py-0.5 focus:outline-none"
+                      className="w-full text-xs font-mono text-slate-700 placeholder:text-slate-300 border border-transparent hover:border-slate-200 focus:border-slate-300 rounded px-1 py-0.5 focus:outline-none"
                     />
+                  </div>
+                )}
+              </div>
+
+              {/* Dedicated Print View for Business Details (Generous Breathing Space) */}
+              <div className="hidden print:block space-y-1.5 text-xs text-slate-600 leading-relaxed pt-1">
+                {invoice.business.address && <div>{invoice.business.address}</div>}
+                {invoice.business.cityStateZip && <div>{invoice.business.cityStateZip}</div>}
+                {(invoice.business.email || invoice.business.phone) && (
+                  <div className="flex flex-wrap items-center gap-x-4 gap-y-1 pt-0.5">
+                    {invoice.business.email && <span>{invoice.business.email}</span>}
+                    {invoice.business.phone && <span>{invoice.business.phone}</span>}
+                  </div>
+                )}
+                {invoice.business.taxId && (
+                  <div className="text-[11px] font-mono text-slate-500 pt-0.5">
+                    Tax ID / VAT: {invoice.business.taxId}
                   </div>
                 )}
               </div>
@@ -227,7 +247,7 @@ export const InvoiceSheet: React.FC<InvoiceSheetProps> = ({
             <div className="sm:text-right print-text-right space-y-2.5 min-w-[220px]">
               <div className="flex sm:justify-end print:justify-end items-center gap-2">
                 <span
-                  className="text-3xl font-extrabold tracking-tight"
+                  className="text-2xl sm:text-3xl font-extrabold tracking-tight"
                   style={{ color: activeTheme.hex }}
                 >
                   INVOICE
@@ -240,70 +260,95 @@ export const InvoiceSheet: React.FC<InvoiceSheetProps> = ({
                 )}
               </div>
 
-              {/* Invoice Number */}
-              <div className="flex sm:justify-end print:justify-end items-center gap-2">
-                <span className="text-xs font-semibold text-slate-500 uppercase tracking-wider">
-                  Invoice #:
-                </span>
-                <input
-                  type="text"
-                  value={invoice.invoiceNumber}
-                  onChange={(e) => onChange({ invoiceNumber: e.target.value })}
-                  placeholder="INV-001"
-                  className="font-mono font-semibold text-sm text-slate-900 border border-transparent hover:border-slate-200 focus:border-slate-300 rounded px-2 py-0.5 text-left sm:text-right print-text-right w-36 focus:outline-none"
-                />
-              </div>
-
-              {/* Dates Grid */}
-              <div className="space-y-1.5 text-xs">
-                <div className="flex sm:justify-end print:justify-end items-center gap-2">
-                  <span className="text-slate-500 font-medium flex items-center gap-1">
-                    <Calendar className="w-3.5 h-3.5 text-slate-400 no-print" />
-                    <span>Issue Date:</span>
+              {/* Invoice Metadata Screen Form */}
+              <div className="no-print space-y-2">
+                <div className="flex items-center justify-between sm:justify-end gap-2">
+                  <span className="text-xs font-semibold text-slate-500 uppercase tracking-wider shrink-0">
+                    Invoice #:
                   </span>
-                  <input
-                    type="date"
-                    value={invoice.issueDate}
-                    onChange={(e) => onChange({ issueDate: e.target.value })}
-                    className="font-mono text-xs text-slate-800 border border-transparent hover:border-slate-200 focus:border-slate-300 rounded px-2 py-0.5 focus:outline-none"
-                  />
-                </div>
-
-                <div className="flex sm:justify-end print:justify-end items-center gap-2">
-                  <span className="text-slate-500 font-medium flex items-center gap-1">
-                    <Calendar className="w-3.5 h-3.5 text-slate-400 no-print" />
-                    <span>Due Date:</span>
-                  </span>
-                  <input
-                    type="date"
-                    value={invoice.dueDate}
-                    onChange={(e) => onChange({ dueDate: e.target.value })}
-                    className="font-mono text-xs font-semibold text-slate-900 border border-transparent hover:border-slate-200 focus:border-slate-300 rounded px-2 py-0.5 focus:outline-none"
-                  />
-                </div>
-
-                <div className="flex sm:justify-end print:justify-end items-center gap-2">
-                  <span className="text-slate-500 font-medium">Terms:</span>
                   <input
                     type="text"
-                    value={invoice.paymentTerms}
-                    onChange={(e) => onChange({ paymentTerms: e.target.value })}
-                    placeholder="Net 30"
-                    className="text-xs text-slate-700 border border-transparent hover:border-slate-200 focus:border-slate-300 rounded px-2 py-0.5 text-left sm:text-right print-text-right w-24 focus:outline-none"
+                    value={invoice.invoiceNumber}
+                    onChange={(e) => onChange({ invoiceNumber: e.target.value })}
+                    placeholder="INV-001"
+                    className="font-mono font-semibold text-sm text-slate-900 border border-transparent hover:border-slate-200 focus:border-slate-300 rounded px-2 py-0.5 text-right w-36 focus:outline-none"
                   />
                 </div>
+
+                <div className="space-y-1.5 text-xs">
+                  <div className="flex items-center justify-between sm:justify-end gap-2">
+                    <span className="text-slate-500 font-medium flex items-center gap-1 shrink-0">
+                      <Calendar className="w-3.5 h-3.5 text-slate-400 no-print" />
+                      <span>Issue Date:</span>
+                    </span>
+                    <input
+                      type="date"
+                      value={invoice.issueDate}
+                      onChange={(e) => onChange({ issueDate: e.target.value })}
+                      className="font-mono text-xs text-slate-800 border border-transparent hover:border-slate-200 focus:border-slate-300 rounded px-2 py-0.5 focus:outline-none"
+                    />
+                  </div>
+
+                  <div className="flex items-center justify-between sm:justify-end gap-2">
+                    <span className="text-slate-500 font-medium flex items-center gap-1 shrink-0">
+                      <Calendar className="w-3.5 h-3.5 text-slate-400 no-print" />
+                      <span>Due Date:</span>
+                    </span>
+                    <input
+                      type="date"
+                      value={invoice.dueDate}
+                      onChange={(e) => onChange({ dueDate: e.target.value })}
+                      className="font-mono text-xs font-semibold text-slate-900 border border-transparent hover:border-slate-200 focus:border-slate-300 rounded px-2 py-0.5 focus:outline-none"
+                    />
+                  </div>
+
+                  <div className="flex items-center justify-between sm:justify-end gap-2">
+                    <span className="text-slate-500 font-medium shrink-0">Terms:</span>
+                    <input
+                      type="text"
+                      value={invoice.paymentTerms}
+                      onChange={(e) => onChange({ paymentTerms: e.target.value })}
+                      placeholder="Net 30"
+                      className="text-xs text-slate-700 border border-transparent hover:border-slate-200 focus:border-slate-300 rounded px-2 py-0.5 text-right w-24 focus:outline-none"
+                    />
+                  </div>
+                </div>
+              </div>
+
+              {/* Dedicated Print View for Document Metadata (Pristine Breathing Room) */}
+              <div className="hidden print:block text-right space-y-2 text-xs text-slate-700 leading-relaxed min-w-[200px]">
+                <div className="flex justify-end items-center gap-2">
+                  <span className="text-[11px] font-bold uppercase tracking-wider text-slate-500">Invoice #:</span>
+                  <span className="font-mono font-bold text-slate-900 text-sm">{invoice.invoiceNumber || 'INV-001'}</span>
+                </div>
+                <div className="flex justify-end items-center gap-2">
+                  <span className="text-slate-500">Issue Date:</span>
+                  <span className="font-mono text-slate-800">{invoice.issueDate || '—'}</span>
+                </div>
+                <div className="flex justify-end items-center gap-2">
+                  <span className="text-slate-500">Due Date:</span>
+                  <span className="font-mono font-bold text-slate-900">{invoice.dueDate || '—'}</span>
+                </div>
+                {invoice.paymentTerms && (
+                  <div className="flex justify-end items-center gap-2">
+                    <span className="text-slate-500">Terms:</span>
+                    <span className="text-slate-800 font-medium">{invoice.paymentTerms}</span>
+                  </div>
+                )}
               </div>
             </div>
           </div>
 
           {/* Bill To / Client Section */}
-          <div className="mt-7 pt-5 border-t border-slate-100 flex flex-col sm:flex-row gap-5 sm:gap-6 justify-between print-row">
+          <div className="mt-6 sm:mt-7 pt-5 border-t border-slate-100 flex flex-col sm:flex-row gap-5 sm:gap-6 justify-between print-row">
             <div className="max-w-md w-full">
               <div className="flex items-center gap-1.5 text-xs font-bold uppercase tracking-wider text-slate-400 mb-2">
                 <Building2 className="w-3.5 h-3.5 no-print" />
                 <span>Billed To (Client Details)</span>
               </div>
-              <div className="space-y-1 text-xs leading-relaxed">
+
+              {/* Client Edit View for Screen */}
+              <div className="no-print space-y-1 text-xs leading-relaxed">
                 <input
                   type="text"
                   value={invoice.client.name}
@@ -313,7 +358,7 @@ export const InvoiceSheet: React.FC<InvoiceSheetProps> = ({
                     })
                   }
                   placeholder="Client Contact Name"
-                  className="w-full font-semibold text-sm text-slate-900 placeholder:text-slate-300 border border-transparent hover:border-slate-200 focus:border-slate-300 rounded px-1.5 py-0.5 -mx-1.5 focus:outline-none"
+                  className="w-full font-semibold text-sm text-slate-900 placeholder:text-slate-300 border border-transparent hover:border-slate-200 focus:border-slate-300 rounded px-1.5 py-0.5 focus:outline-none"
                 />
                 <input
                   type="text"
@@ -324,7 +369,7 @@ export const InvoiceSheet: React.FC<InvoiceSheetProps> = ({
                     })
                   }
                   placeholder="Client Organization / Company"
-                  className="w-full text-slate-700 font-medium placeholder:text-slate-300 border border-transparent hover:border-slate-200 focus:border-slate-300 rounded px-1.5 py-0.5 -mx-1.5 focus:outline-none"
+                  className="w-full text-slate-700 font-medium placeholder:text-slate-300 border border-transparent hover:border-slate-200 focus:border-slate-300 rounded px-1.5 py-0.5 focus:outline-none"
                 />
                 <input
                   type="text"
@@ -335,7 +380,7 @@ export const InvoiceSheet: React.FC<InvoiceSheetProps> = ({
                     })
                   }
                   placeholder="Client Street Address"
-                  className="w-full text-slate-600 placeholder:text-slate-300 border border-transparent hover:border-slate-200 focus:border-slate-300 rounded px-1.5 py-0.5 -mx-1.5 focus:outline-none"
+                  className="w-full text-slate-600 placeholder:text-slate-300 border border-transparent hover:border-slate-200 focus:border-slate-300 rounded px-1.5 py-0.5 focus:outline-none"
                 />
                 <input
                   type="text"
@@ -346,9 +391,9 @@ export const InvoiceSheet: React.FC<InvoiceSheetProps> = ({
                     })
                   }
                   placeholder="Client City, State, ZIP"
-                  className="w-full text-slate-600 placeholder:text-slate-300 border border-transparent hover:border-slate-200 focus:border-slate-300 rounded px-1.5 py-0.5 -mx-1.5 focus:outline-none"
+                  className="w-full text-slate-600 placeholder:text-slate-300 border border-transparent hover:border-slate-200 focus:border-slate-300 rounded px-1.5 py-0.5 focus:outline-none"
                 />
-                <div className="grid grid-cols-2 gap-2 print:flex print:gap-4 pt-0.5">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-1.5 sm:gap-2 pt-0.5">
                   <input
                     type="email"
                     value={invoice.client.email}
@@ -358,7 +403,7 @@ export const InvoiceSheet: React.FC<InvoiceSheetProps> = ({
                       })
                     }
                     placeholder="client@company.com"
-                    className="w-full text-slate-600 placeholder:text-slate-300 border border-transparent hover:border-slate-200 focus:border-slate-300 rounded px-1.5 py-0.5 -mx-1.5 focus:outline-none"
+                    className="w-full text-slate-600 placeholder:text-slate-300 border border-transparent hover:border-slate-200 focus:border-slate-300 rounded px-1.5 py-0.5 focus:outline-none"
                   />
                   <input
                     type="text"
@@ -369,14 +414,31 @@ export const InvoiceSheet: React.FC<InvoiceSheetProps> = ({
                       })
                     }
                     placeholder="Client Phone Number"
-                    className="w-full text-slate-600 placeholder:text-slate-300 border border-transparent hover:border-slate-200 focus:border-slate-300 rounded px-1.5 py-0.5 -mx-1.5 focus:outline-none"
+                    className="w-full text-slate-600 placeholder:text-slate-300 border border-transparent hover:border-slate-200 focus:border-slate-300 rounded px-1.5 py-0.5 focus:outline-none"
                   />
                 </div>
+              </div>
+
+              {/* Dedicated Print View for Client Details (Spacious Typography) */}
+              <div className="hidden print:block space-y-1.5 text-xs text-slate-700 leading-relaxed">
+                <div className="font-bold text-sm text-slate-900 leading-snug">{invoice.client.name || 'Client Contact'}</div>
+                {invoice.client.company && <div className="font-medium text-slate-800">{invoice.client.company}</div>}
+                {invoice.client.address && <div>{invoice.client.address}</div>}
+                {invoice.client.cityStateZip && <div>{invoice.client.cityStateZip}</div>}
+                {(invoice.client.email || invoice.client.phone) && (
+                  <div className="flex flex-wrap items-center gap-x-4 gap-y-1 pt-0.5 text-slate-600">
+                    {invoice.client.email && <span>{invoice.client.email}</span>}
+                    {invoice.client.phone && <span>{invoice.client.phone}</span>}
+                  </div>
+                )}
+                {invoice.client.taxId && (
+                  <div className="text-[11px] font-mono text-slate-500 pt-0.5">Tax ID / VAT: {invoice.client.taxId}</div>
+                )}
               </div>
             </div>
 
             {/* Currency Banner / Badge */}
-            <div className="sm:self-end print:self-end text-left sm:text-right print-text-right text-xs text-slate-500">
+            <div className="self-start sm:self-end print:self-end text-left sm:text-right print-text-right text-xs text-slate-500 mt-2 sm:mt-0">
               <span className="text-slate-400 block text-[11px] uppercase tracking-wider mb-1">
                 Base Currency
               </span>
@@ -392,8 +454,127 @@ export const InvoiceSheet: React.FC<InvoiceSheetProps> = ({
         {/* ======================================================== */}
         {/* ITEMIZED LINE ITEMS SECTION */}
         {/* ======================================================== */}
-        <div className="mt-7 print:mt-5">
-          <div className="overflow-x-auto">
+        <div className="mt-6 sm:mt-7 print:mt-5">
+          {/* Mobile Card View (screens < 640px, hidden on tablet/desktop and print) */}
+          <div className="block sm:hidden no-print space-y-3.5">
+            {invoice.items.map((item, index) => {
+              const itemAmount = (Number(item.quantity) || 0) * (Number(item.rate) || 0);
+              return (
+                <div
+                  key={item.id}
+                  className="p-3.5 bg-slate-50/70 border border-slate-200/90 rounded-xl space-y-2.5 shadow-2xs"
+                >
+                  <div className="flex items-center justify-between text-xs pb-2 border-b border-slate-200/60">
+                    <span className="font-bold text-slate-700">Line #{index + 1}</span>
+                    <div className="flex items-center gap-1.5">
+                      <button
+                        type="button"
+                        onClick={() => handleDuplicateItem(index)}
+                        className="w-8 h-8 flex items-center justify-center text-slate-600 hover:text-slate-900 bg-white border border-slate-200 rounded-lg shadow-2xs transition-colors cursor-pointer"
+                        title="Duplicate"
+                        aria-label="Duplicate line"
+                      >
+                        <Copy className="w-3.5 h-3.5" />
+                      </button>
+                      <button
+                        type="button"
+                        onClick={() => handleMoveItem(index, 'up')}
+                        disabled={index === 0}
+                        className="w-8 h-8 flex items-center justify-center text-slate-600 hover:text-slate-900 disabled:opacity-20 bg-white border border-slate-200 rounded-lg shadow-2xs transition-colors cursor-pointer"
+                        title="Move Up"
+                        aria-label="Move line up"
+                      >
+                        <ArrowUp className="w-3.5 h-3.5" />
+                      </button>
+                      <button
+                        type="button"
+                        onClick={() => handleMoveItem(index, 'down')}
+                        disabled={index === invoice.items.length - 1}
+                        className="w-8 h-8 flex items-center justify-center text-slate-600 hover:text-slate-900 disabled:opacity-20 bg-white border border-slate-200 rounded-lg shadow-2xs transition-colors cursor-pointer"
+                        title="Move Down"
+                        aria-label="Move line down"
+                      >
+                        <ArrowDown className="w-3.5 h-3.5" />
+                      </button>
+                      <button
+                        type="button"
+                        onClick={() => handleDeleteItem(index)}
+                        className="w-8 h-8 flex items-center justify-center text-slate-600 hover:text-rose-600 hover:bg-rose-50 bg-white border border-slate-200 rounded-lg shadow-2xs transition-colors cursor-pointer"
+                        title="Delete"
+                        aria-label="Delete line"
+                      >
+                        <Trash2 className="w-3.5 h-3.5" />
+                      </button>
+                    </div>
+                  </div>
+
+                  <div>
+                    <label className="text-[11px] font-semibold text-slate-500 uppercase tracking-wider block mb-1">
+                      Description
+                    </label>
+                    <textarea
+                      rows={2}
+                      value={item.description}
+                      onChange={(e) =>
+                        handleUpdateItem(index, { description: e.target.value })
+                      }
+                      placeholder="Describe service rendered..."
+                      className="w-full text-xs text-slate-800 placeholder:text-slate-300 bg-white border border-slate-200 rounded-lg p-2.5 focus:border-slate-400 focus:outline-none resize-none leading-relaxed"
+                    />
+                  </div>
+
+                  <div className="grid grid-cols-2 gap-2.5">
+                    <div>
+                      <label className="text-[11px] font-semibold text-slate-500 uppercase tracking-wider block mb-1">
+                        Qty / Hours
+                      </label>
+                      <input
+                        type="number"
+                        step="any"
+                        min="0"
+                        value={item.quantity === 0 ? '' : item.quantity}
+                        onChange={(e) =>
+                          handleUpdateItem(index, {
+                            quantity: parseFloat(e.target.value) || 0,
+                          })
+                        }
+                        placeholder="1"
+                        className="w-full font-mono text-xs text-slate-800 bg-white border border-slate-200 rounded-lg px-2.5 py-1.5 focus:border-slate-400 focus:outline-none tabular-nums"
+                      />
+                    </div>
+                    <div>
+                      <label className="text-[11px] font-semibold text-slate-500 uppercase tracking-wider block mb-1">
+                        Rate ({CURRENCIES[invoice.currency].symbol})
+                      </label>
+                      <input
+                        type="number"
+                        step="any"
+                        min="0"
+                        value={item.rate === 0 ? '' : item.rate}
+                        onChange={(e) =>
+                          handleUpdateItem(index, {
+                            rate: parseFloat(e.target.value) || 0,
+                          })
+                        }
+                        placeholder="0.00"
+                        className="w-full font-mono text-xs text-slate-800 bg-white border border-slate-200 rounded-lg px-2.5 py-1.5 focus:border-slate-400 focus:outline-none tabular-nums"
+                      />
+                    </div>
+                  </div>
+
+                  <div className="flex items-center justify-between pt-2 border-t border-slate-200/70 text-xs">
+                    <span className="text-slate-500">Subtotal:</span>
+                    <span className="font-mono font-bold text-slate-900 text-sm tabular-nums">
+                      {formatCurrency(itemAmount, invoice.currency)}
+                    </span>
+                  </div>
+                </div>
+              );
+            })}
+          </div>
+
+          {/* Desktop & Tablet Table (and ALWAYS used in print) */}
+          <div className="hidden sm:block print:block overflow-x-auto">
             <table className="w-full border-collapse">
               <thead>
                 <tr className="border-b-2 border-slate-900 text-left text-xs font-bold uppercase tracking-wider text-slate-900">
@@ -404,7 +585,7 @@ export const InvoiceSheet: React.FC<InvoiceSheetProps> = ({
                   <th className="py-3 px-1 text-center w-[40px] no-print"></th>
                 </tr>
               </thead>
-              <tbody className="divide-y divide-slate-100 text-xs">
+              <tbody className="divide-y divide-slate-100 print:divide-slate-200 text-xs">
                 {invoice.items.map((item, index) => {
                   const itemAmount = (Number(item.quantity) || 0) * (Number(item.rate) || 0);
                   return (
@@ -413,7 +594,10 @@ export const InvoiceSheet: React.FC<InvoiceSheetProps> = ({
                       className="group hover:bg-slate-50/60 transition-colors"
                     >
                       {/* Description */}
-                      <td className="py-3 px-3 align-top">
+                      <td className="py-3 px-3 align-top print:py-3.5 print:px-3">
+                        <div className="hidden print:block text-slate-900 text-xs font-normal leading-relaxed whitespace-pre-wrap">
+                          <span className="font-semibold text-slate-900">{item.description || 'Service / Line Item'}</span>
+                        </div>
                         <textarea
                           rows={1}
                           value={item.description}
@@ -421,30 +605,38 @@ export const InvoiceSheet: React.FC<InvoiceSheetProps> = ({
                             handleUpdateItem(index, { description: e.target.value })
                           }
                           placeholder="Describe item or service rendered..."
-                          className="w-full text-slate-800 placeholder:text-slate-300 border border-transparent hover:border-slate-200 focus:border-slate-300 focus:bg-white rounded px-2 py-0.5 -mx-2 focus:outline-none resize-none leading-relaxed"
+                          className="no-print w-full text-slate-800 placeholder:text-slate-300 border border-transparent hover:border-slate-200 focus:border-slate-300 focus:bg-white rounded px-2 py-0.5 -mx-2 focus:outline-none resize-none leading-relaxed"
                         />
                       </td>
 
                       {/* Hours / Quantity */}
-                      <td className="py-3 px-3 text-right align-top">
-                        <input
-                          type="number"
-                          step="any"
-                          min="0"
-                          value={item.quantity === 0 ? '' : item.quantity}
-                          onChange={(e) =>
-                            handleUpdateItem(index, {
-                              quantity: parseFloat(e.target.value) || 0,
-                            })
-                          }
-                          placeholder="1"
-                          className="w-full font-mono text-right text-slate-800 border border-transparent hover:border-slate-200 focus:border-slate-300 focus:bg-white rounded px-2 py-0.5 focus:outline-none tabular-nums"
-                        />
+                      <td className="py-3 px-3 text-right align-top print:py-3.5 print:px-3">
+                        <div className="hidden print:block font-mono text-right text-xs text-slate-800 leading-relaxed">
+                          {item.quantity}
+                        </div>
+                        <div className="no-print">
+                          <input
+                            type="number"
+                            step="any"
+                            min="0"
+                            value={item.quantity === 0 ? '' : item.quantity}
+                            onChange={(e) =>
+                              handleUpdateItem(index, {
+                                quantity: parseFloat(e.target.value) || 0,
+                              })
+                            }
+                            placeholder="1"
+                            className="w-full font-mono text-right text-slate-800 border border-transparent hover:border-slate-200 focus:border-slate-300 focus:bg-white rounded px-2 py-0.5 focus:outline-none tabular-nums"
+                          />
+                        </div>
                       </td>
 
                       {/* Unit Rate */}
-                      <td className="py-3 px-3 text-right align-top">
-                        <div className="flex items-center justify-end">
+                      <td className="py-3 px-3 text-right align-top print:py-3.5 print:px-3">
+                        <div className="hidden print:block font-mono text-right text-xs text-slate-800 leading-relaxed">
+                          {formatCurrency(item.rate, invoice.currency)}
+                        </div>
+                        <div className="no-print flex items-center justify-end">
                           <input
                             type="number"
                             step="any"
@@ -462,7 +654,7 @@ export const InvoiceSheet: React.FC<InvoiceSheetProps> = ({
                       </td>
 
                       {/* Line Subtotal */}
-                      <td className="py-3 px-3 text-right align-top font-mono font-semibold text-slate-900 tabular-nums pt-1.5">
+                      <td className="py-3 px-3 text-right align-top font-mono font-semibold text-slate-900 tabular-nums pt-1.5 print:py-3.5 print:px-3 print:pt-3.5 leading-relaxed">
                         {formatCurrency(itemAmount, invoice.currency)}
                       </td>
 
@@ -472,7 +664,7 @@ export const InvoiceSheet: React.FC<InvoiceSheetProps> = ({
                           <button
                             type="button"
                             onClick={() => handleDuplicateItem(index)}
-                            className="p-1 text-slate-400 hover:text-slate-700 hover:bg-slate-200 rounded transition-colors cursor-pointer"
+                            className="p-1.5 text-slate-400 hover:text-slate-700 hover:bg-slate-200 rounded transition-colors cursor-pointer"
                             title="Duplicate line"
                           >
                             <Copy className="w-3.5 h-3.5" />
@@ -481,7 +673,7 @@ export const InvoiceSheet: React.FC<InvoiceSheetProps> = ({
                             type="button"
                             onClick={() => handleMoveItem(index, 'up')}
                             disabled={index === 0}
-                            className="p-1 text-slate-400 hover:text-slate-700 disabled:opacity-20 rounded transition-colors cursor-pointer"
+                            className="p-1.5 text-slate-400 hover:text-slate-700 disabled:opacity-20 rounded transition-colors cursor-pointer"
                             title="Move up"
                           >
                             <ArrowUp className="w-3.5 h-3.5" />
@@ -490,7 +682,7 @@ export const InvoiceSheet: React.FC<InvoiceSheetProps> = ({
                             type="button"
                             onClick={() => handleMoveItem(index, 'down')}
                             disabled={index === invoice.items.length - 1}
-                            className="p-1 text-slate-400 hover:text-slate-700 disabled:opacity-20 rounded transition-colors cursor-pointer"
+                            className="p-1.5 text-slate-400 hover:text-slate-700 disabled:opacity-20 rounded transition-colors cursor-pointer"
                             title="Move down"
                           >
                             <ArrowDown className="w-3.5 h-3.5" />
@@ -498,7 +690,7 @@ export const InvoiceSheet: React.FC<InvoiceSheetProps> = ({
                           <button
                             type="button"
                             onClick={() => handleDeleteItem(index)}
-                            className="p-1 text-slate-400 hover:text-rose-600 hover:bg-rose-50 rounded transition-colors cursor-pointer"
+                            className="p-1.5 text-slate-400 hover:text-rose-600 hover:bg-rose-50 rounded transition-colors cursor-pointer"
                             title="Delete line"
                           >
                             <Trash2 className="w-3.5 h-3.5" />
@@ -513,16 +705,16 @@ export const InvoiceSheet: React.FC<InvoiceSheetProps> = ({
           </div>
 
           {/* Add Row Button (hidden on print) */}
-          <div className="mt-3 flex items-center justify-between no-print pt-1">
+          <div className="mt-4 flex items-center justify-between no-print pt-1">
             <button
               type="button"
               onClick={handleAddItem}
-              className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-semibold text-slate-700 bg-slate-50 hover:bg-slate-100 border border-slate-200 transition-colors cursor-pointer"
+              className="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-lg text-xs font-semibold text-slate-700 bg-slate-50 hover:bg-slate-100 border border-slate-200 transition-colors cursor-pointer shadow-2xs"
             >
               <Plus className="w-3.5 h-3.5 text-slate-600" />
               <span>Add Line Item</span>
             </button>
-            <span className="text-[11px] text-slate-400">
+            <span className="text-xs text-slate-400">
               {invoice.items.length} {invoice.items.length === 1 ? 'line item' : 'line items'}
             </span>
           </div>
@@ -531,19 +723,22 @@ export const InvoiceSheet: React.FC<InvoiceSheetProps> = ({
         {/* ======================================================== */}
         {/* FINANCIAL SUMMARY & TOTALS */}
         {/* ======================================================== */}
-        <div className="mt-7 pt-5 border-t border-slate-200 flex flex-col md:flex-row justify-between gap-6 print-row page-break-inside-avoid">
+        <div className="mt-6 sm:mt-7 pt-5 border-t border-slate-200 flex flex-col md:flex-row justify-between gap-6 print-row page-break-inside-avoid">
           {/* Notes & Terms Section (Left Column) */}
-          <div className="flex-1 space-y-3.5">
+          <div className="flex-1 space-y-4">
             <div>
               <label className="block text-xs font-bold uppercase tracking-wider text-slate-400 mb-1">
                 Notes / Memo
               </label>
+              <div className="hidden print:block text-xs text-slate-700 leading-relaxed whitespace-pre-wrap py-1">
+                {invoice.notes || '—'}
+              </div>
               <textarea
-                rows={1}
+                rows={2}
                 value={invoice.notes}
                 onChange={(e) => onChange({ notes: e.target.value })}
                 placeholder="Notes to the client (e.g. thank you message or delivery info)..."
-                className="w-full text-xs text-slate-700 placeholder:text-slate-300 border border-slate-100 hover:border-slate-200 focus:border-slate-300 rounded-lg p-2.5 print:p-0 print:border-none focus:outline-none transition-colors leading-relaxed"
+                className="no-print w-full text-xs text-slate-700 placeholder:text-slate-300 border border-slate-100 hover:border-slate-200 focus:border-slate-300 rounded-lg p-2.5 focus:outline-none transition-colors leading-relaxed"
               />
             </div>
 
@@ -551,18 +746,21 @@ export const InvoiceSheet: React.FC<InvoiceSheetProps> = ({
               <label className="block text-xs font-bold uppercase tracking-wider text-slate-400 mb-1">
                 Payment Terms & Conditions
               </label>
+              <div className="hidden print:block text-xs text-slate-600 leading-relaxed whitespace-pre-wrap py-1">
+                {invoice.terms || '—'}
+              </div>
               <textarea
-                rows={1}
+                rows={2}
                 value={invoice.terms}
                 onChange={(e) => onChange({ terms: e.target.value })}
                 placeholder="Payment terms, late fee policy, or return terms..."
-                className="w-full text-xs text-slate-600 placeholder:text-slate-300 border border-slate-100 hover:border-slate-200 focus:border-slate-300 rounded-lg p-2.5 print:p-0 print:border-none focus:outline-none transition-colors leading-relaxed"
+                className="no-print w-full text-xs text-slate-600 placeholder:text-slate-300 border border-slate-100 hover:border-slate-200 focus:border-slate-300 rounded-lg p-2.5 focus:outline-none transition-colors leading-relaxed"
               />
             </div>
           </div>
 
           {/* Totals Breakdown (Right Column) */}
-          <div className="w-full md:w-80 print:w-72 space-y-2">
+          <div className="w-full md:w-80 print:w-72 space-y-2.5">
             {/* Subtotal */}
             <div className="flex items-center justify-between text-xs text-slate-600 py-1">
               <span>Subtotal:</span>
@@ -651,7 +849,7 @@ export const InvoiceSheet: React.FC<InvoiceSheetProps> = ({
         {/* ======================================================== */}
         {/* PAYMENT INSTRUCTIONS SECTION */}
         {/* ======================================================== */}
-        <div className="mt-7 pt-5 border-t border-slate-200 page-break-inside-avoid">
+        <div className="mt-6 sm:mt-7 pt-5 border-t border-slate-200 page-break-inside-avoid">
           <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2.5 mb-3">
             <div className="flex items-center gap-1.5">
               <CreditCard className="w-4 h-4 text-slate-600 no-print" />
@@ -661,7 +859,7 @@ export const InvoiceSheet: React.FC<InvoiceSheetProps> = ({
             </div>
 
             {/* Payment Method Selector (no-print) */}
-            <div className="no-print flex items-center gap-1 bg-slate-100 p-1 rounded-lg">
+            <div className="no-print flex flex-wrap gap-1 bg-slate-100 p-1 rounded-lg">
               <button
                 type="button"
                 onClick={() => handlePaymentMethodChange('bank')}
@@ -709,10 +907,75 @@ export const InvoiceSheet: React.FC<InvoiceSheetProps> = ({
             </div>
           </div>
 
-          {/* Payment Detail Card */}
-          <div className="bg-slate-50/80 rounded-xl border border-slate-200/80 print:border-slate-200 print:bg-transparent p-4 text-xs">
+          {/* Dedicated Print View for Payment Details (Airy & Publication-Grade) */}
+          <div className="hidden print:block bg-slate-50/60 rounded-xl border border-slate-200 p-4 text-xs text-slate-800">
             {activePaymentTab === 'bank' && (
-              <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 print:grid-cols-3 gap-3.5">
+              <div className="grid grid-cols-3 gap-4">
+                {invoice.paymentDetails.bankName && (
+                  <div className="space-y-0.5">
+                    <span className="text-[10px] text-slate-400 uppercase tracking-wider block font-bold">Bank Name</span>
+                    <span className="font-semibold text-slate-900">{invoice.paymentDetails.bankName}</span>
+                  </div>
+                )}
+                {invoice.paymentDetails.accountName && (
+                  <div className="space-y-0.5">
+                    <span className="text-[10px] text-slate-400 uppercase tracking-wider block font-bold">Account Name</span>
+                    <span className="text-slate-800">{invoice.paymentDetails.accountName}</span>
+                  </div>
+                )}
+                {invoice.paymentDetails.accountNumber && (
+                  <div className="space-y-0.5">
+                    <span className="text-[10px] text-slate-400 uppercase tracking-wider block font-bold">Account # / IBAN</span>
+                    <span className="font-mono text-slate-900 font-semibold">{invoice.paymentDetails.accountNumber}</span>
+                  </div>
+                )}
+                {invoice.paymentDetails.routingNumber && (
+                  <div className="space-y-0.5">
+                    <span className="text-[10px] text-slate-400 uppercase tracking-wider block font-bold">Routing / IFSC</span>
+                    <span className="font-mono text-slate-900">{invoice.paymentDetails.routingNumber}</span>
+                  </div>
+                )}
+                {invoice.paymentDetails.swiftBic && (
+                  <div className="space-y-0.5">
+                    <span className="text-[10px] text-slate-400 uppercase tracking-wider block font-bold">SWIFT / BIC</span>
+                    <span className="font-mono text-slate-900">{invoice.paymentDetails.swiftBic}</span>
+                  </div>
+                )}
+                {invoice.paymentDetails.customNotes && (
+                  <div className="space-y-0.5 col-span-3">
+                    <span className="text-[10px] text-slate-400 uppercase tracking-wider block font-bold">Payment Memo</span>
+                    <span className="text-slate-700">{invoice.paymentDetails.customNotes}</span>
+                  </div>
+                )}
+              </div>
+            )}
+
+            {activePaymentTab === 'stripe' && (
+              <div className="space-y-1">
+                <span className="text-[10px] text-slate-400 uppercase tracking-wider block font-bold">Stripe Payment Link</span>
+                <span className="font-mono text-blue-700 underline">{invoice.paymentDetails.stripeLink || 'buy.stripe.com/...'}</span>
+              </div>
+            )}
+
+            {activePaymentTab === 'paypal' && (
+              <div className="space-y-1">
+                <span className="text-[10px] text-slate-400 uppercase tracking-wider block font-bold">PayPal Payment</span>
+                <span className="font-mono text-slate-900 font-semibold">{invoice.paymentDetails.paypalEmail || 'payments@...'}</span>
+              </div>
+            )}
+
+            {activePaymentTab === 'custom' && (
+              <div className="space-y-1">
+                <span className="text-[10px] text-slate-400 uppercase tracking-wider block font-bold">Custom Payment Instructions</span>
+                <p className="text-slate-800 leading-relaxed whitespace-pre-wrap">{invoice.paymentDetails.customNotes}</p>
+              </div>
+            )}
+          </div>
+
+          {/* Payment Detail Interactive Card (Screen Only) */}
+          <div className="no-print bg-slate-50/80 rounded-xl border border-slate-200/80 p-3.5 sm:p-4 text-xs">
+            {activePaymentTab === 'bank' && (
+              <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-3 sm:gap-3.5">
                 <div>
                   <span className="text-[11px] text-slate-400 uppercase tracking-wider block mb-0.5">Bank Name</span>
                   <input
@@ -765,7 +1028,7 @@ export const InvoiceSheet: React.FC<InvoiceSheetProps> = ({
                   />
                 </div>
                 <div>
-                  <span className="text-[11px] text-slate-400 uppercase tracking-wider block mb-0.5">Routing #</span>
+                  <span className="text-[11px] text-slate-400 uppercase tracking-wider block mb-0.5">Routing # / IFSC</span>
                   <input
                     type="text"
                     value={invoice.paymentDetails.routingNumber}
@@ -884,7 +1147,7 @@ export const InvoiceSheet: React.FC<InvoiceSheetProps> = ({
                       },
                     })
                   }
-                  placeholder="Enter custom instructions (e.g. check remittance address, Wise, crypto wallet)..."
+                  placeholder="Enter custom instructions (e.g. check remittance address, Wise, UPI, crypto wallet)..."
                   className="w-full text-xs text-slate-800 border border-transparent hover:border-slate-200 focus:border-slate-300 rounded px-1.5 py-0.5 focus:outline-none leading-relaxed"
                 />
               </div>
@@ -894,7 +1157,7 @@ export const InvoiceSheet: React.FC<InvoiceSheetProps> = ({
 
         {/* Optional Signature Block */}
         {invoice.enableSignature && (
-          <div className="mt-7 pt-5 border-t border-slate-100 flex justify-between items-end text-xs text-slate-500 page-break-inside-avoid">
+          <div className="mt-6 sm:mt-7 pt-5 border-t border-slate-100 flex flex-col sm:flex-row justify-between items-start sm:items-end gap-4 text-xs text-slate-500 page-break-inside-avoid">
             <div className="text-[11px] text-slate-400">
               Questions? Contact us at{' '}
               <span className="text-slate-600 font-medium">
@@ -902,7 +1165,7 @@ export const InvoiceSheet: React.FC<InvoiceSheetProps> = ({
               </span>
             </div>
 
-            <div className="text-right space-y-1 w-60">
+            <div className="self-end text-right space-y-1 w-52 sm:w-60">
               <div className="border-b border-slate-300 pb-1">
                 <input
                   type="text"

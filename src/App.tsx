@@ -198,15 +198,15 @@ export default function App() {
         <QuickControls invoice={invoice} onChange={handleUpdateInvoice} />
 
         {/* Informational Tip Bar */}
-        <div className="no-print mb-4 flex items-center justify-between text-xs text-slate-500 bg-white/60 border border-slate-200/60 rounded-lg px-4 py-2">
-          <div className="flex items-center gap-2">
-            <span className="font-semibold text-slate-700">Live Editor:</span>
-            <span>Click any text or number directly on the document sheet to edit in real time.</span>
+        <div className="no-print mb-4 sm:mb-6 flex flex-col sm:flex-row sm:items-center justify-between gap-2.5 text-xs text-slate-500 bg-white border border-slate-200/80 rounded-xl p-3 sm:px-4 sm:py-2.5 shadow-2xs">
+          <div className="flex items-start sm:items-center gap-2">
+            <span className="font-bold text-slate-800 shrink-0">Live Editor:</span>
+            <span className="text-slate-600 leading-snug">Click any text or number directly on the document sheet to edit in real time.</span>
           </div>
           <button
             type="button"
             onClick={() => setShowPrintTips(!showPrintTips)}
-            className="flex items-center gap-1 text-slate-600 hover:text-slate-900 font-medium cursor-pointer"
+            className="self-start sm:self-auto flex items-center gap-1.5 text-slate-700 hover:text-slate-950 font-medium cursor-pointer shrink-0 bg-slate-50 hover:bg-slate-100 border border-slate-200 px-2.5 py-1 rounded-lg transition-colors text-[11px]"
           >
             <HelpCircle className="w-3.5 h-3.5 text-slate-400" />
             <span>PDF Print Tips</span>

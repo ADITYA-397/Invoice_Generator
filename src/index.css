@@ -30,7 +30,7 @@ html.lenis, html.lenis body {
 
 
 @page {
-  margin: 8mm 10mm;
+  margin: 10mm 12mm;
   size: A4 portrait;
 }
 
@@ -47,8 +47,8 @@ html.lenis, html.lenis body {
     width: 100% !important;
     height: auto !important;
     min-height: auto !important;
-    font-size: 12px !important;
-    line-height: 1.5 !important;
+    font-size: 13px !important;
+    line-height: 1.55 !important;
     letter-spacing: 0.01em !important;
     -webkit-print-color-adjust: exact !important;
     print-color-adjust: exact !important;
@@ -56,6 +56,10 @@ html.lenis, html.lenis body {
 
   .no-print {
     display: none !important;
+  }
+
+  .print-only {
+    display: block !important;
   }
 
   /* Paper container resets cleanly for print */
@@ -66,10 +70,12 @@ html.lenis, html.lenis body {
     margin: 0 !important;
     max-width: 100% !important;
     width: 100% !important;
+    background: transparent !important;
   }
 
   /* Force side-by-side desktop layout on printed pages even from mobile devices */
   .print-row {
+    display: flex !important;
     flex-direction: row !important;
     align-items: flex-start !important;
     justify-content: space-between !important;
@@ -84,11 +90,11 @@ html.lenis, html.lenis body {
     border-color: transparent !important;
     background-color: transparent !important;
     box-shadow: none !important;
-    padding: 1px 0 !important;
+    padding: 2px 0 !important;
     margin: 0 !important;
     resize: none !important;
     font-size: inherit !important;
-    line-height: inherit !important;
+    line-height: 1.55 !important;
     color: #0f172a !important;
   }
 
@@ -96,14 +102,21 @@ html.lenis, html.lenis body {
     color: transparent !important;
   }
 
-  /* Page break rules: prevent awkward cuts */
+  /* Page break rules: print in single page if few items, gracefully break if more */
   table {
-    page-break-inside: auto;
+    page-break-inside: auto !important;
+    break-inside: auto !important;
     width: 100% !important;
+    border-collapse: collapse !important;
   }
 
   thead {
     display: table-header-group !important;
+  }
+
+  tbody {
+    page-break-inside: auto !important;
+    break-inside: auto !important;
   }
 
   tr {
