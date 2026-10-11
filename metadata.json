@@ -1,0 +1,7 @@
+{
+  "name": "Invoice Generator",
+  "description": "An interactive, professionally styled invoice generator with line items, tax/discount calculations, currency selection, and print-ready PDF export.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
+
