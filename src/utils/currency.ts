@@ -4,6 +4,7 @@ export const CURRENCIES: Record<CurrencyCode, CurrencyConfig> = {
   USD: { code: 'USD', symbol: '$', name: 'US Dollar', locale: 'en-US' },
   EUR: { code: 'EUR', symbol: '€', name: 'Euro', locale: 'de-DE' },
   GBP: { code: 'GBP', symbol: '£', name: 'British Pound', locale: 'en-GB' },
+  INR: { code: 'INR', symbol: '₹', name: 'Indian Rupee', locale: 'en-IN' },
   CAD: { code: 'CAD', symbol: 'CA$', name: 'Canadian Dollar', locale: 'en-CA' },
   AUD: { code: 'AUD', symbol: 'A$', name: 'Australian Dollar', locale: 'en-AU' },
   JPY: { code: 'JPY', symbol: '¥', name: 'Japanese Yen', locale: 'ja-JP' },
@@ -26,6 +27,9 @@ export function formatCurrency(amount: number, currencyCode: CurrencyCode): stri
   }
   if (currencyCode === 'GBP') {
     return `${sign}£${formattedNumber}`;
+  }
+  if (currencyCode === 'INR') {
+    return `${sign}₹${formattedNumber}`;
   }
   if (currencyCode === 'CAD') {
     return `${sign}CA$${formattedNumber}`;

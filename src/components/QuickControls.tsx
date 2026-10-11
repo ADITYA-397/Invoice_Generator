@@ -41,7 +41,7 @@ export const QuickControls: React.FC<QuickControlsProps> = ({ invoice, onChange 
             <span>Currency</span>
           </label>
           <div className="flex flex-wrap items-center gap-1.5">
-            {(['USD', 'EUR', 'GBP', 'CAD'] as CurrencyCode[]).map((curr) => {
+            {(['USD', 'EUR', 'GBP', 'INR', 'CAD'] as CurrencyCode[]).map((curr) => {
               const info = CURRENCIES[curr];
               const isSelected = invoice.currency === curr;
               return (
@@ -69,6 +69,7 @@ export const QuickControls: React.FC<QuickControlsProps> = ({ invoice, onChange 
               <option value="USD">USD ($)</option>
               <option value="EUR">EUR (€)</option>
               <option value="GBP">GBP (£)</option>
+              <option value="INR">INR (₹)</option>
               <option value="CAD">CAD (CA$)</option>
               <option value="AUD">AUD (A$)</option>
               <option value="JPY">JPY (¥)</option>
