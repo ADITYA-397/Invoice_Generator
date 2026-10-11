@@ -18,13 +18,13 @@ export const HeaderNav: React.FC<HeaderNavProps> = ({
 }) => {
   return (
     <header className="no-print sticky top-0 z-40 w-full bg-white/95 backdrop-blur-md border-b border-slate-200 shadow-xs">
-      <div className="max-w-7xl mx-auto px-2.5 sm:px-6 lg:px-8 h-14 sm:h-16 flex items-center justify-between gap-1.5 sm:gap-4 md:gap-8 min-w-0">
+      <div className="max-w-7xl mx-auto px-2.5 sm:px-6 lg:px-8 h-14 sm:h-16 flex items-center justify-between gap-1 sm:gap-4 md:gap-8 min-w-0">
         {/* Zone 1: Brand Wordmark */}
         <div className="flex items-center gap-1.5 sm:gap-2.5 shrink-0 min-w-0">
           <div className="w-7 h-7 sm:w-8 sm:h-8 rounded-lg bg-slate-900 flex items-center justify-center text-white font-bold text-sm sm:text-base shadow-xs shrink-0">
             <FileText className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-emerald-400" />
           </div>
-          <span className="text-base sm:text-lg font-bold tracking-tight text-slate-900 truncate">
+          <span className="text-sm sm:text-lg font-bold tracking-tight text-slate-900 truncate">
             Invoicely
           </span>
         </div>
@@ -61,11 +61,11 @@ export const HeaderNav: React.FC<HeaderNavProps> = ({
         </nav>
 
         {/* Zone 3: Primary Action CTA & Mobile Controls */}
-        <div className="flex items-center gap-1 sm:gap-2 shrink-0">
+        <div className="flex items-center gap-1 sm:gap-2 shrink-0 min-w-0">
           <button
             type="button"
             onClick={onReset}
-            className="md:hidden w-8 h-8 flex items-center justify-center text-slate-500 hover:text-slate-900 hover:bg-slate-100 rounded-lg transition-colors cursor-pointer shrink-0"
+            className="md:hidden w-7 h-7 sm:w-8 sm:h-8 flex items-center justify-center text-slate-500 hover:text-slate-900 hover:bg-slate-100 rounded-lg transition-colors cursor-pointer shrink-0"
             title="Reset sample"
             aria-label="Reset sample"
           >
@@ -75,20 +75,20 @@ export const HeaderNav: React.FC<HeaderNavProps> = ({
           <button
             type="button"
             onClick={onOpenTemplatesModal}
-            className="md:hidden w-8 h-8 flex items-center justify-center text-slate-600 hover:text-slate-900 hover:bg-slate-100 rounded-lg transition-colors cursor-pointer relative shrink-0"
+            className="md:hidden w-7 h-7 sm:w-8 sm:h-8 flex items-center justify-center text-slate-600 hover:text-slate-900 hover:bg-slate-100 rounded-lg transition-colors cursor-pointer relative shrink-0"
             title={`Templates (${savedTemplatesCount})`}
             aria-label="Open templates"
           >
             <FolderOpen className="w-3.5 h-3.5" />
             {savedTemplatesCount > 0 && (
-              <span className="absolute top-1.5 right-1.5 w-1.5 h-1.5 rounded-full bg-emerald-500"></span>
+              <span className="absolute top-1 right-1 w-1.5 h-1.5 rounded-full bg-emerald-500"></span>
             )}
           </button>
 
           <button
             type="button"
             onClick={onOpenSaveModal}
-            className="md:hidden w-8 h-8 flex items-center justify-center text-slate-600 hover:text-slate-900 hover:bg-slate-100 rounded-lg transition-colors cursor-pointer shrink-0"
+            className="md:hidden w-7 h-7 sm:w-8 sm:h-8 flex items-center justify-center text-slate-600 hover:text-slate-900 hover:bg-slate-100 rounded-lg transition-colors cursor-pointer shrink-0"
             title="Save as Template"
             aria-label="Save as template"
           >
@@ -102,9 +102,7 @@ export const HeaderNav: React.FC<HeaderNavProps> = ({
             title="Download PDF"
           >
             <Printer className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-emerald-400 shrink-0" />
-            <span className="hidden sm:inline">Download PDF</span>
-            <span className="hidden min-[380px]:inline sm:hidden font-medium">Download</span>
-            <span className="min-[380px]:hidden font-medium">PDF</span>
+            <span>Download PDF</span>
           </button>
         </div>
       </div>

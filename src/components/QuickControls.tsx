@@ -49,7 +49,7 @@ export const QuickControls: React.FC<QuickControlsProps> = ({ invoice, onChange 
                   key={curr}
                   type="button"
                   onClick={() => handleCurrencyChange(curr)}
-                  className={`h-8 px-2 sm:px-2.5 text-xs font-semibold rounded-lg transition-colors cursor-pointer border ${
+                  className={`h-8 px-2 sm:px-2.5 text-xs font-semibold rounded-lg transition-colors cursor-pointer border flex-1 sm:flex-initial min-w-[48px] text-center ${
                     isSelected
                       ? 'bg-slate-900 text-white border-slate-900 shadow-xs'
                       : 'bg-slate-50 text-slate-700 border-slate-200 hover:bg-slate-100 hover:text-slate-900'
@@ -63,7 +63,7 @@ export const QuickControls: React.FC<QuickControlsProps> = ({ invoice, onChange 
             <select
               value={invoice.currency}
               onChange={(e) => handleCurrencyChange(e.target.value as CurrencyCode)}
-              className="h-8 text-xs bg-slate-50 border border-slate-200 rounded-lg px-2 text-slate-700 hover:bg-slate-100 cursor-pointer focus:outline-none focus:ring-1 focus:ring-slate-400 min-w-[90px] flex-1 sm:flex-initial"
+              className="h-8 text-xs bg-slate-50 border border-slate-200 rounded-lg px-2 text-slate-700 hover:bg-slate-100 cursor-pointer focus:outline-none focus:ring-1 focus:ring-slate-400 min-w-[80px] flex-1 sm:flex-initial"
               aria-label="More Currencies"
             >
               <option value="USD">USD ($)</option>
@@ -97,7 +97,7 @@ export const QuickControls: React.FC<QuickControlsProps> = ({ invoice, onChange 
                   key={p.label}
                   type="button"
                   onClick={() => handleDuePreset(p.days, p.term)}
-                  className={`h-8 px-2 sm:px-2.5 text-xs font-semibold rounded-lg transition-colors cursor-pointer border ${
+                  className={`h-8 px-2 sm:px-2.5 text-xs font-semibold rounded-lg transition-colors cursor-pointer border flex-1 sm:flex-initial min-w-[56px] text-center ${
                     isSelected
                       ? 'bg-slate-900 text-white border-slate-900 shadow-xs'
                       : 'bg-slate-50 text-slate-700 border-slate-200 hover:bg-slate-100'
@@ -118,44 +118,56 @@ export const QuickControls: React.FC<QuickControlsProps> = ({ invoice, onChange 
           </label>
           <div className="space-y-2 min-w-0">
             {/* Tax Row */}
-            <div className="flex items-center gap-1.5 flex-wrap min-w-0">
-              <span className="text-xs font-medium text-slate-500 w-8 sm:w-9 shrink-0">Tax:</span>
-              <div className="flex items-center gap-1 flex-wrap min-w-0">
-                {[0, 8.25, 10, 18, 20].map((rate) => (
-                  <button
-                    key={rate}
-                    type="button"
-                    onClick={() => handleTaxPreset(rate)}
-                    className={`h-7 px-2 text-xs rounded-md transition-colors cursor-pointer border ${
-                      invoice.taxPercent === rate
-                        ? 'bg-slate-900 text-white border-slate-900 font-bold'
-                        : 'bg-slate-50 text-slate-700 border-slate-200 hover:bg-slate-100'
-                    }`}
-                  >
-                    {rate}%
-                  </button>
-                ))}
+            <div className="flex flex-col sm:flex-row sm:items-center gap-1 sm:gap-2 min-w-0">
+              <div className="flex items-center justify-between sm:w-11 shrink-0">
+                <span className="text-xs font-medium text-slate-500">Tax:</span>
+                <span className="text-[11px] font-mono text-slate-400 sm:hidden">{invoice.taxPercent}%</span>
+              </div>
+              <div className="flex items-center gap-1 flex-wrap min-w-0 flex-1">
+                {[0, 8.25, 10, 18, 20].map((rate) => {
+                  const isSelected = invoice.taxPercent === rate;
+                  return (
+                    <button
+                      key={rate}
+                      type="button"
+                      onClick={() => handleTaxPreset(rate)}
+                      className={`h-7 px-1.5 sm:px-2 text-xs rounded-md transition-colors cursor-pointer border flex-1 min-w-[34px] text-center font-medium ${
+                        isSelected
+                          ? 'bg-slate-900 text-white border-slate-900 font-bold shadow-2xs'
+                          : 'bg-slate-50 text-slate-700 border-slate-200 hover:bg-slate-100'
+                      }`}
+                    >
+                      {rate}%
+                    </button>
+                  );
+                })}
               </div>
             </div>
 
             {/* Discount Row */}
-            <div className="flex items-center gap-1.5 flex-wrap min-w-0">
-              <span className="text-xs font-medium text-slate-500 w-8 sm:w-9 shrink-0">Disc:</span>
-              <div className="flex items-center gap-1 flex-wrap min-w-0">
-                {[0, 5, 10, 15].map((disc) => (
-                  <button
-                    key={disc}
-                    type="button"
-                    onClick={() => handleDiscountPreset(disc)}
-                    className={`h-7 px-2 text-xs rounded-md transition-colors cursor-pointer border ${
-                      invoice.discountPercent === disc
-                        ? 'bg-slate-900 text-white border-slate-900 font-bold'
-                        : 'bg-slate-50 text-slate-700 border-slate-200 hover:bg-slate-100'
-                    }`}
-                  >
-                    {disc}%
-                  </button>
-                ))}
+            <div className="flex flex-col sm:flex-row sm:items-center gap-1 sm:gap-2 min-w-0">
+              <div className="flex items-center justify-between sm:w-11 shrink-0">
+                <span className="text-xs font-medium text-slate-500">Disc:</span>
+                <span className="text-[11px] font-mono text-slate-400 sm:hidden">{invoice.discountPercent}%</span>
+              </div>
+              <div className="flex items-center gap-1 flex-wrap min-w-0 flex-1">
+                {[0, 5, 10, 15].map((disc) => {
+                  const isSelected = invoice.discountPercent === disc;
+                  return (
+                    <button
+                      key={disc}
+                      type="button"
+                      onClick={() => handleDiscountPreset(disc)}
+                      className={`h-7 px-1.5 sm:px-2 text-xs rounded-md transition-colors cursor-pointer border flex-1 min-w-[34px] text-center font-medium ${
+                        isSelected
+                          ? 'bg-slate-900 text-white border-slate-900 font-bold shadow-2xs'
+                          : 'bg-slate-50 text-slate-700 border-slate-200 hover:bg-slate-100'
+                      }`}
+                    >
+                      {disc}%
+                    </button>
+                  );
+                })}
               </div>
             </div>
           </div>
@@ -199,7 +211,7 @@ export const QuickControls: React.FC<QuickControlsProps> = ({ invoice, onChange 
               <select
                 value={invoice.status}
                 onChange={(e) => onChange({ status: e.target.value as InvoiceData['status'] })}
-                className="h-7 text-xs font-medium bg-slate-50 border border-slate-200 rounded-md px-2 text-slate-800 hover:bg-slate-100 cursor-pointer focus:outline-none flex-1 sm:flex-initial min-w-[90px]"
+                className="h-7 text-xs font-medium bg-slate-50 border border-slate-200 rounded-md px-2 text-slate-800 hover:bg-slate-100 cursor-pointer focus:outline-none flex-1 sm:flex-initial min-w-[80px]"
                 aria-label="Invoice Status"
               >
                 <option value="draft">Draft</option>

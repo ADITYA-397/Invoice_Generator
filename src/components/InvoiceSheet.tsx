@@ -464,13 +464,13 @@ export const InvoiceSheet: React.FC<InvoiceSheetProps> = ({
                   key={item.id}
                   className="p-3.5 bg-slate-50/70 border border-slate-200/90 rounded-xl space-y-2.5 shadow-2xs"
                 >
-                  <div className="flex items-center justify-between text-xs pb-2 border-b border-slate-200/60">
+                  <div className="flex items-center justify-between text-xs pb-2 border-b border-slate-200/60 min-w-0">
                     <span className="font-bold text-slate-700">Line #{index + 1}</span>
-                    <div className="flex items-center gap-1.5">
+                    <div className="flex items-center gap-1 sm:gap-1.5 shrink-0">
                       <button
                         type="button"
                         onClick={() => handleDuplicateItem(index)}
-                        className="w-8 h-8 flex items-center justify-center text-slate-600 hover:text-slate-900 bg-white border border-slate-200 rounded-lg shadow-2xs transition-colors cursor-pointer"
+                        className="w-7 h-7 sm:w-8 sm:h-8 flex items-center justify-center text-slate-600 hover:text-slate-900 bg-white border border-slate-200 rounded-lg shadow-2xs transition-colors cursor-pointer"
                         title="Duplicate"
                         aria-label="Duplicate line"
                       >
@@ -480,7 +480,7 @@ export const InvoiceSheet: React.FC<InvoiceSheetProps> = ({
                         type="button"
                         onClick={() => handleMoveItem(index, 'up')}
                         disabled={index === 0}
-                        className="w-8 h-8 flex items-center justify-center text-slate-600 hover:text-slate-900 disabled:opacity-20 bg-white border border-slate-200 rounded-lg shadow-2xs transition-colors cursor-pointer"
+                        className="w-7 h-7 sm:w-8 sm:h-8 flex items-center justify-center text-slate-600 hover:text-slate-900 disabled:opacity-20 bg-white border border-slate-200 rounded-lg shadow-2xs transition-colors cursor-pointer"
                         title="Move Up"
                         aria-label="Move line up"
                       >
@@ -490,7 +490,7 @@ export const InvoiceSheet: React.FC<InvoiceSheetProps> = ({
                         type="button"
                         onClick={() => handleMoveItem(index, 'down')}
                         disabled={index === invoice.items.length - 1}
-                        className="w-8 h-8 flex items-center justify-center text-slate-600 hover:text-slate-900 disabled:opacity-20 bg-white border border-slate-200 rounded-lg shadow-2xs transition-colors cursor-pointer"
+                        className="w-7 h-7 sm:w-8 sm:h-8 flex items-center justify-center text-slate-600 hover:text-slate-900 disabled:opacity-20 bg-white border border-slate-200 rounded-lg shadow-2xs transition-colors cursor-pointer"
                         title="Move Down"
                         aria-label="Move line down"
                       >
@@ -499,7 +499,7 @@ export const InvoiceSheet: React.FC<InvoiceSheetProps> = ({
                       <button
                         type="button"
                         onClick={() => handleDeleteItem(index)}
-                        className="w-8 h-8 flex items-center justify-center text-slate-600 hover:text-rose-600 hover:bg-rose-50 bg-white border border-slate-200 rounded-lg shadow-2xs transition-colors cursor-pointer"
+                        className="w-7 h-7 sm:w-8 sm:h-8 flex items-center justify-center text-slate-600 hover:text-rose-600 hover:bg-rose-50 bg-white border border-slate-200 rounded-lg shadow-2xs transition-colors cursor-pointer"
                         title="Delete"
                         aria-label="Delete line"
                       >
@@ -859,11 +859,11 @@ export const InvoiceSheet: React.FC<InvoiceSheetProps> = ({
             </div>
 
             {/* Payment Method Selector (no-print) */}
-            <div className="no-print flex flex-wrap gap-1 bg-slate-100 p-1 rounded-lg min-w-0">
+            <div className="no-print grid grid-cols-2 sm:flex sm:flex-wrap gap-1 bg-slate-100 p-1 rounded-lg min-w-0 w-full sm:w-auto">
               <button
                 type="button"
                 onClick={() => handlePaymentMethodChange('bank')}
-                className={`px-2.5 py-1 text-xs font-medium rounded-md transition-colors cursor-pointer ${
+                className={`px-2.5 py-1 text-xs font-medium rounded-md transition-colors cursor-pointer text-center ${
                   activePaymentTab === 'bank'
                     ? 'bg-white text-slate-900 shadow-2xs font-semibold'
                     : 'text-slate-600 hover:text-slate-900'
@@ -874,7 +874,7 @@ export const InvoiceSheet: React.FC<InvoiceSheetProps> = ({
               <button
                 type="button"
                 onClick={() => handlePaymentMethodChange('stripe')}
-                className={`px-2.5 py-1 text-xs font-medium rounded-md transition-colors cursor-pointer ${
+                className={`px-2.5 py-1 text-xs font-medium rounded-md transition-colors cursor-pointer text-center ${
                   activePaymentTab === 'stripe'
                     ? 'bg-white text-slate-900 shadow-2xs font-semibold'
                     : 'text-slate-600 hover:text-slate-900'
@@ -885,7 +885,7 @@ export const InvoiceSheet: React.FC<InvoiceSheetProps> = ({
               <button
                 type="button"
                 onClick={() => handlePaymentMethodChange('paypal')}
-                className={`px-2.5 py-1 text-xs font-medium rounded-md transition-colors cursor-pointer ${
+                className={`px-2.5 py-1 text-xs font-medium rounded-md transition-colors cursor-pointer text-center ${
                   activePaymentTab === 'paypal'
                     ? 'bg-white text-slate-900 shadow-2xs font-semibold'
                     : 'text-slate-600 hover:text-slate-900'
@@ -896,7 +896,7 @@ export const InvoiceSheet: React.FC<InvoiceSheetProps> = ({
               <button
                 type="button"
                 onClick={() => handlePaymentMethodChange('custom')}
-                className={`px-2.5 py-1 text-xs font-medium rounded-md transition-colors cursor-pointer ${
+                className={`px-2.5 py-1 text-xs font-medium rounded-md transition-colors cursor-pointer text-center ${
                   activePaymentTab === 'custom'
                     ? 'bg-white text-slate-900 shadow-2xs font-semibold'
                     : 'text-slate-600 hover:text-slate-900'
@@ -1157,22 +1157,22 @@ export const InvoiceSheet: React.FC<InvoiceSheetProps> = ({
 
         {/* Optional Signature Block */}
         {invoice.enableSignature && (
-          <div className="mt-6 sm:mt-7 pt-5 border-t border-slate-100 flex flex-col sm:flex-row justify-between items-start sm:items-end gap-4 text-xs text-slate-500 page-break-inside-avoid">
-            <div className="text-[11px] text-slate-400">
+          <div className="mt-6 sm:mt-7 pt-5 border-t border-slate-100 flex flex-col sm:flex-row justify-between items-start sm:items-end gap-4 text-xs text-slate-500 page-break-inside-avoid min-w-0">
+            <div className="text-[11px] text-slate-400 min-w-0 break-words">
               Questions? Contact us at{' '}
               <span className="text-slate-600 font-medium">
                 {invoice.business.email || 'billing'}
               </span>
             </div>
 
-            <div className="self-end text-right space-y-1 w-52 sm:w-60">
+            <div className="self-stretch sm:self-end text-left sm:text-right space-y-1 w-full sm:w-60 min-w-0">
               <div className="border-b border-slate-300 pb-1">
                 <input
                   type="text"
                   value={invoice.signatureName}
                   onChange={(e) => onChange({ signatureName: e.target.value })}
                   placeholder="Authorized Representative"
-                  className="w-full text-right font-medium text-slate-800 border border-transparent hover:border-slate-200 rounded px-1 py-0.5 focus:outline-none italic"
+                  className="w-full text-left sm:text-right font-medium text-slate-800 border border-transparent hover:border-slate-200 rounded px-1 py-0.5 focus:outline-none italic min-w-0"
                 />
               </div>
               <span className="text-[11px] text-slate-400 uppercase tracking-wider block">
