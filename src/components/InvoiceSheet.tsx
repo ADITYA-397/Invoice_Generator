@@ -119,12 +119,12 @@ export const InvoiceSheet: React.FC<InvoiceSheetProps> = ({
                       src={invoice.business.logo}
                       alt={invoice.business.name || 'Business Logo'}
                       referrerPolicy="no-referrer"
-                      className="h-12 sm:h-14 w-auto max-w-[180px] object-contain rounded-lg"
+                      className="h-16 sm:h-20 max-h-24 w-auto max-w-[220px] sm:max-w-[280px] print:max-h-20 print:max-w-[240px] object-contain rounded-xl shadow-2xs"
                     />
                     <button
                       type="button"
                       onClick={onOpenLogoModal}
-                      className="no-print absolute inset-0 bg-slate-900/60 text-white text-xs font-medium rounded-lg opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center cursor-pointer"
+                      className="no-print absolute inset-0 bg-slate-900/60 text-white text-xs font-semibold rounded-xl opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center cursor-pointer shadow-md"
                     >
                       Change Logo
                     </button>
@@ -133,9 +133,9 @@ export const InvoiceSheet: React.FC<InvoiceSheetProps> = ({
                   <button
                     type="button"
                     onClick={onOpenLogoModal}
-                    className="no-print flex items-center gap-2 px-3 py-1.5 border border-dashed border-slate-300 rounded-lg text-slate-500 hover:text-slate-900 hover:border-slate-800 hover:bg-slate-50 transition-colors text-xs font-medium cursor-pointer"
+                    className="no-print flex items-center gap-2.5 px-3.5 py-2 sm:px-4 sm:py-2.5 border-2 border-dashed border-slate-300 hover:border-slate-800 rounded-xl text-slate-600 hover:text-slate-900 hover:bg-slate-50 transition-all text-xs sm:text-sm font-semibold cursor-pointer shadow-2xs"
                   >
-                    <ImageIcon className="w-4 h-4" />
+                    <ImageIcon className="w-4.5 h-4.5 text-slate-500" />
                     <span>+ Add Business Logo</span>
                   </button>
                 )}
