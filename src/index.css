@@ -30,16 +30,25 @@ html.lenis, html.lenis body {
 
 
 @page {
-  margin: 10mm;
+  margin: 10mm 12mm;
   size: A4 portrait;
 }
 
 @media print {
+  *, *::before, *::after {
+    box-sizing: border-box !important;
+  }
+
   html, body {
     background: #ffffff !important;
     color: #0f172a !important;
     padding: 0 !important;
     margin: 0 !important;
+    width: 100% !important;
+    height: auto !important;
+    min-height: auto !important;
+    font-size: 11px !important;
+    line-height: 1.35 !important;
     -webkit-print-color-adjust: exact !important;
     print-color-adjust: exact !important;
   }
@@ -48,31 +57,61 @@ html.lenis, html.lenis body {
     display: none !important;
   }
 
+  /* Paper container resets cleanly for print */
   .print-invoice-sheet {
     box-shadow: none !important;
     border: none !important;
     padding: 0 !important;
-    margin: 0 auto !important;
+    margin: 0 !important;
     max-width: 100% !important;
     width: 100% !important;
   }
 
+  /* Force side-by-side desktop layout on printed pages even from mobile devices */
+  .print-row {
+    flex-direction: row !important;
+    align-items: flex-start !important;
+    justify-content: space-between !important;
+  }
+
+  .print-text-right {
+    text-align: right !important;
+  }
+
+  /* Clean borderless inputs in print */
   input, textarea, select {
     border-color: transparent !important;
     background-color: transparent !important;
     box-shadow: none !important;
-    padding-left: 0 !important;
-    padding-right: 0 !important;
+    padding: 0 !important;
+    margin: 0 !important;
     resize: none !important;
+    font-size: inherit !important;
+    color: #0f172a !important;
   }
 
   input::placeholder, textarea::placeholder {
     color: transparent !important;
   }
 
-  /* Prevent page breaks inside line items and summary */
+  /* Page break rules: prevent awkward cuts */
+  table {
+    page-break-inside: auto;
+    width: 100% !important;
+  }
+
+  thead {
+    display: table-header-group !important;
+  }
+
+  tr {
+    page-break-inside: avoid !important;
+    break-inside: avoid !important;
+  }
+
   .page-break-inside-avoid {
     break-inside: avoid !important;
     page-break-inside: avoid !important;
   }
 }
+
